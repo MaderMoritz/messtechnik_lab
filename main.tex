@@ -260,12 +260,143 @@ Da die Differenzspannung nicht vollständig null war, ist dies ein Näherungswer
 Aus der Restspannung allein lässt sich keine genaue Messunsicherheit für $C_2$ angeben.
 
 \clearpage
+\subsection{Oszilloskopbilder zum Abgleich}
+\Cref{fig:ac-bruecke-unabgeglichen,fig:ac-bruecke-abgeglichen} zeigen die Brücke vor und nach dem Kapazitätsabgleich.
+Die RMS-Anzeige der Differenzspannung sinkt von \SI{192}{\milli\volt} auf \SI{9.70}{\milli\volt}.
+Der zweite Wert entspricht gerundet den angegebenen \SI{10}{\milli\volt}; ein vollständiger Nullabgleich wurde nicht erreicht.
+
+\begin{center}
+\begin{minipage}{0.82\linewidth}
+  \centering
+  \includegraphics[width=\linewidth]{WhatsApp Unknown 2026-11-14 at 13.36.28/3_1_2_bruecke_unabgegl.jpeg}
+  \captionsetup{hypcap=false}
+  \captionof{figure}{Nicht abgeglichene AC-Messbrücke. Die Anzeige \texttt{DC RMS - Zyk.(M)} beträgt \SI{192}{\milli\volt}.}
+  \label{fig:ac-bruecke-unabgeglichen}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.82\linewidth}
+  \centering
+  \includegraphics[width=\linewidth]{WhatsApp Unknown 2026-11-14 at 13.36.28/3_1_2_bruecke_abgeglich.jpeg}
+  \captionsetup{hypcap=false}
+  \captionof{figure}{Näherungsweise abgeglichene AC-Messbrücke. Die Anzeige \texttt{DC RMS - Zyk.(M)} beträgt noch \SI{9.70}{\milli\volt}.}
+  \label{fig:ac-bruecke-abgeglichen}
+\end{minipage}
+\end{center}
+
+\clearpage
 \section{Subtrahierverstärker}
+Der Subtrahierverstärker wurde nach Abschnitt 3.2.1 des Laborskripts aufgebaut und untersucht~\cite{laborskript}.
+Die bipolare Versorgung wurde auf $\pm\SI{15}{\volt}$ und die Strombegrenzung auf \SI{250}{\milli\ampere} eingestellt.
+Damit wurde von der im Skript vorgesehenen Versorgung mit $\pm\SI{12}{\volt}$ abgewichen.
+
 \subsection{Berechnung der Widerstandswerte}
+In der Hausaufgabe wurde für die Halbbrücke eine maximale Differenzspannung von $U_{d,\mathrm{max}}=\SI{0.25}{\milli\volt}$ berechnet.
+Mit der gewählten Verstärkung von 1000 ergibt sich daraus ein Ausgangssignal von \SI{0.25}{\volt} ohne Offset.
+Für gleiche Widerstandsverhältnisse gilt ideal
+\begin{equation}
+  \addxcontentsline{loe}{equation}[\theequation]{Nominale Differenzverstärkung des Subtrahierverstärkers}
+  G_{\mathrm{dm}}=\frac{R_2}{R_1}=\frac{R_4}{R_3}=1000.
+  \label{eq:sub-gain-nominal}
+\end{equation}
+Die gewählten und die tatsächlich gemessenen Widerstände sind in \cref{tab:sub-widerstaende} angegeben.
+
+\begin{center}
+\begin{minipage}{0.78\linewidth}
+\centering
+\captionsetup{hypcap=false}
+\captionof{table}{Widerstände des Subtrahierverstärkers.}
+\label{tab:sub-widerstaende}
+\begin{tabular}{@{}lll@{}}
+  \toprule
+  Widerstand & Nennwert & Gemessener Wert \\
+  \midrule
+  $R_1$ & \SI{1}{\kilo\ohm} & \SI{993}{\ohm} \\
+  $R_2$ & \SI{1}{\mega\ohm} & \SI{1.01}{\mega\ohm} \\
+  $R_3$ & \SI{1}{\kilo\ohm} & \SI{992}{\ohm} \\
+  $R_4$ & \SI{1}{\mega\ohm} & \SI{1.01}{\mega\ohm} \\
+  \bottomrule
+\end{tabular}
+\end{minipage}
+\end{center}
+Aus den Messwerten folgen $R_2/R_1\approx\num{1017.1}$ und $R_4/R_3\approx\num{1018.1}$.
+Die Verhältnisse liegen damit etwas über dem Sollwert und stimmen nicht exakt überein.
+Für die Differenzverstärkung ist daraus näherungsweise ein Wert von 1017 zu erwarten.
+
 \subsection{Verstärkungsmessung}
+Der Funktionsgenerator wurde auf eine Spitze-Spitze-Spannung von $U_{e,\mathrm{pp}}=\SI{4}{\milli\volt}$ bei $f=\SI{2}{\kilo\hertz}$ eingestellt.
+Am Ausgang wurden $U_{a,\mathrm{pp}}=\SI{4.22}{\volt}$ gemessen, siehe \cref{fig:sub-verstaerkung}.
+Die Anzeige bezeichnet einen Spitze-Spitze-Wert und keinen Scheitelwert.
+Damit ergibt sich
+\begin{equation}
+  \addxcontentsline{loe}{equation}[\theequation]{Gemessene Differenzverstärkung des Subtrahierverstärkers}
+  G_{\mathrm{dm,mess}}=\frac{U_{a,\mathrm{pp}}}{U_{e,\mathrm{pp}}}
+  =\frac{\SI{4.22}{\volt}}{\SI{4}{\milli\volt}}=1055.
+  \label{eq:sub-gain-mess}
+\end{equation}
+Dies liegt um \SI{5.5}{\percent} über dem nominalen Wert 1000 und um etwa \SI{3.7}{\percent} über der Erwartung aus den gemessenen Widerständen.
+Die Widerstandswerte erklären somit einen Teil der Abweichung.
+Da für die Eingangsspannung die Generatoreinstellung verwendet wurde, kann auch deren Abweichung von der tatsächlichen Spannung am Verstärkereingang das Ergebnis beeinflussen.
+
+\begin{center}
+\begin{minipage}{0.82\linewidth}
+  \centering
+  \includegraphics[width=\linewidth]{WhatsApp Unknown 2026-11-14 at 13.36.28/3_2_1_verstaerkung_sub.jpeg}
+  \captionsetup{hypcap=false}
+  \captionof{figure}{Ausgangssignal des Subtrahierverstärkers bei \SI{2}{\kilo\hertz}. Die Anzeige \texttt{Sp-Sp(1)} beträgt \SI{4.22}{\volt}.}
+  \label{fig:sub-verstaerkung}
+\end{minipage}
+\end{center}
+
 \subsection{Offsetmessung und Eingangs-Offset}
+% TODO: Schaltbild der tatsaechlichen Offset-Messbeschaltung ergaenzen.
+Für diese Messung wurden beide Eingänge kurzgeschlossen und gemeinsam mit Masse verbunden.
+Am Ausgang wurde ein Offsetbetrag von $U_{a,\mathrm{os}}=\SI{522.5}{\milli\volt}$ gemessen; dazu liegt kein Oszilloskopbild vor.
+Auf die gemessene Differenzverstärkung bezogen entspricht dies
+\begin{equation}
+  \addxcontentsline{loe}{equation}[\theequation]{Auf den Eingang bezogener Offset des Subtrahierverstärkers}
+  U_{e,\mathrm{os,eq}}=\frac{U_{a,\mathrm{os}}}{G_{\mathrm{dm,mess}}}
+  =\frac{\SI{522.5}{\milli\volt}}{1055}
+  \approx\SI{0.495}{\milli\volt}.
+  \label{eq:sub-offset-eingang}
+\end{equation}
+Der Ausgangsoffset ist damit größer als das für die Halbbrücke berechnete Nutzsignal von \SI{0.25}{\volt}.
+Er muss bei einer späteren Brückenmessung als Nullpunkt berücksichtigt werden.
+Der berechnete Eingangsbezug beschreibt den gesamten gemessenen Offset; der reine OPV-Offset und Beiträge der Eingangsströme wurden nicht getrennt bestimmt.
+
 \subsection{CMRR-Messung beziehungsweise Berechnung}
+% TODO: Schaltbild der CMRR-Messbeschaltung ergaenzen.
+Beide Eingänge wurden kurzgeschlossen und gemeinsam auf \SI{2.5}{\volt}, \SI{3.3}{\volt} und \SI{5}{\volt} gelegt.
+Bei diesen Gleichtaktpegeln war keine Änderung des Ausgangs am Oszilloskop erkennbar.
+Nach Rücksprache mit dem Labortutor wurde diese Beobachtung so dokumentiert.
+Für die Auswertung wären
+\[
+  G_{\mathrm{cm}}=\frac{\Delta U_a}{\Delta U_{\mathrm{cm}}},
+  \qquad \mathrm{CMRR}_{\mathrm{dB}}
+  =20\log_{10}\!\left(\frac{|G_{\mathrm{dm}}|}{|G_{\mathrm{cm}}|}\right)
+\]
+zu bestimmen.
+Da keine Ausgangsänderung aufgelöst und keine Nachweisgrenze festgehalten wurde, lässt sich kein belastbarer Zahlenwert für die CMRR angeben.
+Dies bedeutet nicht, dass $G_{\mathrm{cm}}$ exakt null oder die CMRR unendlich ist.
+
+\clearpage
 \subsection{Messung der Rauschspannung}
+% TODO: Schaltbild nach Klaerung der tatsaechlichen Eingangsbeschaltung ergaenzen.
+Die Rauschspannung wurde am Ausgang mit AC-Kopplung gemessen.
+Das Oszilloskop zeigt einen AC-RMS-Wert von \SI{1.409}{\milli\volt}, also gerundet \SI{1.4}{\milli\volt}, siehe \cref{fig:sub-rauschen}.
+Die Eingangsbeschaltung während dieser Messung ist nicht mehr bekannt.
+Der Wert wird deshalb als Rauschmessung des verwendeten Aufbaus angegeben; eine Zuordnung zum Verstärker allein ist damit nicht möglich.
+
+\begin{center}
+\begin{minipage}{0.82\linewidth}
+  \centering
+  \includegraphics[width=\linewidth]{WhatsApp Unknown 2026-11-14 at 13.36.28/3_2_1_rauschrms_sub.jpeg}
+  \captionsetup{hypcap=false}
+  \captionof{figure}{Rauschmessung am Ausgang mit AC-Kopplung. Die Anzeige \texttt{AC RMS - VB(1)} beträgt \SI{1.409}{\milli\volt}.}
+  \label{fig:sub-rauschen}
+\end{minipage}
+\end{center}
 
 \clearpage
 \section{Instrumentenverstärker}
@@ -312,7 +443,7 @@ Aus der Restspannung allein lässt sich keine genaue Messunsicherheit für $C_2$
 
   \bibitem{laborskript}
   \emph{Messtechnik Labor: Skriptum}, Wintersemester 2026/2027.
-  Abschnitt 3.1.1, S.~29--30 (PDF-S.~33--34).
+  Abschnitte 3.1--3.2, S.~29--33 (PDF-S.~33--37).
 
   % Hier später weitere Literaturangaben einfügen.
 \end{thebibliography}
