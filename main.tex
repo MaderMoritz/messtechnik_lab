@@ -2,17 +2,102 @@
 \documentclass[11pt,a4paper]{scrartcl}
 \input{vorlage/praeambel}
 \input{protokolldaten}
+\KOMAoptions{listof=totoc,bibliography=totoc}
 \hypersetup{pdftitle={Laborprotokoll \Versuchsnummer: \Versuchstitel},
   pdfauthor={\Verfasser},pdfsubject={\Lehrveranstaltung}}
 \begin{document}
 \hypersetup{pageanchor=false}
 \input{vorlage/deckblatt}
-% Für spätere Inhalte die folgenden Zeilen aktivieren und die Datei anlegen:
+% Protokollinhalt direkt in dieser Hauptdatei bearbeiten.
 \pagenumbering{Roman}
 \hypersetup{pageanchor=true}
 \tableofcontents
 \clearpage
+% Abbildungen mit \caption{...} werden hier automatisch aufgenommen.
+\listoffigures
+\clearpage
 \pagenumbering{arabic}
 \pagestyle{scrheadings}
-\input{kapitel/protokoll}
+\section{Formalkriterien}
+\textbf{Verwendete Dokumentvorlage:}
+Dieses Protokoll verwendet eine angepasste Version der LaTeX-Vorlage
+\href{https://github.com/bendemaj/Laborprotokoll}{\texttt{bendemaj/Laborprotokoll}}
+von GitHub~\cite{vorlage-laborprotokoll}.
+
+\subsection{Titel und Bezeichnung der Teilübung}
+\subsection{Datum, Teilnehmer und Messplatz}
+\subsection{Verwendete Geräte}
+\subsection{Kurze einführende Beschreibung (optional)}
+\subsection{Bestätigung der selbst durchgeführten Messungen und der daraus gewonnenen Ergebnisse}
+\subsection{Unterschriften aller Teilnehmer}
+
+\clearpage
+\section{DC-Messbrücke}
+\subsection{Messschaltung}
+\subsection{Wahl der Versorgungsspannung}
+\subsection{Bestimmung des Realteils der Impedanz}
+\subsection{Abhängigkeit von der Versorgungsspannung bei nicht abgeglichener Brücke: Plot und Erklärung}
+\subsection{Auswirkung des Innenwiderstands des Messgeräts}
+
+\clearpage
+\section{AC-Messbrücke}
+\subsection{Messschaltung}
+\subsection{Wahl der Spannung}
+\subsection{Wahl des Frequenzbereichs}
+\subsection{Abgleichbedingung der AC-Messbrücke}
+\subsection{Bestimmung der Kapazität}
+
+\clearpage
+\section{Subtrahierverstärker}
+\subsection{Berechnung der Widerstandswerte}
+\subsection{Verstärkungsmessung}
+\subsection{Offsetmessung und Eingangs-Offset}
+\subsection{CMRR-Messung beziehungsweise Berechnung}
+\subsection{Messung der Rauschspannung}
+
+\clearpage
+\section{Instrumentenverstärker}
+\subsection{Berechnung des Gain-Widerstands}
+\subsection{Verstärkungsmessung}
+\subsection{Offsetmessung und Eingangs-Offset}
+\subsection{CMRR-Messung beziehungsweise Berechnung}
+\subsection{Vergleich von Subtrahier- und Instrumentenverstärker}
+
+\clearpage
+\section{Gewichtsmessung mit Halbbrücke}
+\subsection{Berechnung der Sensitivität (Aufgabe 3.4)}
+\subsection{Messung der Sensitivität und Plot}
+\subsection{Offsetmessung}
+\subsection{Messung des Handy-Gewichts}
+\subsection{Vergleich mit der Waage}
+
+\clearpage
+\section{Temperatursensitivität der Halbbrücke}
+\subsection{Messung der RMS-Rauschspannung}
+\subsection{Plot der Verstärkung über der Temperatur}
+\subsection{Plot der Rauschspannung über der Temperatur}
+
+\clearpage
+\section{Vollbrücke}
+\subsection{Sensitivitätsmessung und Vergleich mit der Halbbrücke}
+\subsection{Temperaturabhängigkeit}
+\subsection{Plot der Rauschspannung über der Temperatur}
+
+\clearpage
+\section{Tiefpassfilter zur Rauschunterdrückung}
+\subsection{Messung der gefilterten Rauschspannung}
+\subsection{Erklärung der Rauschquellen}
+
+\clearpage
+% Weitere Quellen als \bibitem{schluessel} ergänzen und mit \cite{schluessel} zitieren.
+\renewcommand{\refname}{Literaturverzeichnis}
+\begin{thebibliography}{99}
+  \bibitem{vorlage-laborprotokoll}
+  \texttt{bendemaj}: \emph{Laborprotokoll -- LaTeX-Vorlage für Laborprotokolle}.
+  GitHub-Repository.
+  \url{https://github.com/bendemaj/Laborprotokoll}.
+  Zugriff am 14.~November~2026.
+
+  % Hier später weitere Literaturangaben einfügen.
+\end{thebibliography}
 \end{document}
