@@ -1,3 +1,4 @@
+% !TeX root = main.tex
 % Deckblattdaten in protokolldaten.tex bearbeiten.
 \documentclass[11pt,a4paper]{scrartcl}
 \input{vorlage/praeambel}
@@ -5,6 +6,13 @@
 \KOMAoptions{listof=totoc,bibliography=totoc}
 \hypersetup{pdftitle={Laborprotokoll \Versuchsnummer: \Versuchstitel},
   pdfauthor={\Verfasser},pdfsubject={\Lehrveranstaltung}}
+
+\DeclareNewTOC[
+  type=equation,
+  listname={Gleichungsverzeichnis}
+]{loe}
+\setuptoc{loe}{totoc}
+
 \begin{document}
 \hypersetup{pageanchor=false}
 \input{vorlage/deckblatt}
@@ -16,6 +24,10 @@
 % Abbildungen mit \caption{...} werden hier automatisch aufgenommen.
 \listoffigures
 \clearpage
+
+\listofequations
+\clearpage
+
 \pagenumbering{arabic}
 \pagestyle{scrheadings}
 \section{Formalkriterien}
@@ -26,26 +38,226 @@ von GitHub~\cite{vorlage-laborprotokoll}.
 
 \subsection{Titel und Bezeichnung der Teilübung}
 \subsection{Datum, Teilnehmer und Messplatz}
+\begingroup\setlength{\parfillskip}{0pt}\noindent
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{37mm}Y@{}}
+Versuchsdatum & \Versuchsdatum \\
+Teilnehmer & \Verfasser; \Laborpartner \\
+Laborgruppe & \Laborgruppe \\
+Laborplatz & \Messplatz \\
+\end{tabularx}\par\endgroup
+% Foto labor_platz.jpg: CA0410-5 ist auf einer Anschlussleiste sichtbar.
+% Der Messplatz wird aus der bereits ausgefuellten protokolldaten.tex uebernommen.
+
 \subsection{Verwendete Geräte}
+\label{sec:geraeteliste}
+Die verwendeten Geräte und Hilfsmittel sind in \cref{tab:geraete} aufgelistet.
+Die Gerätebezeichnungen wurden aus den Fotos übernommen. Fehlende Angaben sind in der Tabelle markiert und werden noch ergänzt.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Geräte und Hilfsmittel für Laborübung 3.}
+  \label{tab:geraete}
+  \begingroup
+  \small
+  \setlength{\tabcolsep}{3pt}
+  \renewcommand{\arraystretch}{1.3}
+  \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{30mm}>{\raggedright\arraybackslash}p{46mm}>{\raggedright\arraybackslash}p{29mm}Y@{}}
+    \toprule
+    Gerät / Hilfsmittel & Hersteller / Typ & Inventarnr. / Kennung & Messbereich / Bemerkung \\
+    \midrule
+    Digitalmultimeter & Keysight U1232A & \platzhalter{ergänzen} & Diagonalspannung; \platzhalter{Messbereich} \\
+    Digitalmultimeter & Neumann 9140 & \platzhalter{ergänzen} & \platzhalter{Messbereiche} \\
+    Oszilloskop & Agilent InfiniiVision DSO-X 2002A & CD0408-6 & \platzhalter{Tastköpfe} \\
+    Funktionsgenerator & Siglent SDG1025 & CA0406-5 & \platzhalter{Betriebsart} \\
+    DC-Netzgerät & RS PRO RS-D3305P & \platzhalter{ergänzen} & \platzhalter{Kanäle} \\
+    Widerstandsdekade & Goerz Electro & Nr.~A~2475 & Aufdruck: 529 MB 65/32 \\
+    Kapazitätsdekade & Danbridge DK4S & \platzhalter{ergänzen} & \platzhalter{verwendeter Bereich} \\
+    Steckbrett & \platzhalter{Typ ergänzen} & CA0406-6 & Zusatzwiderstände und Verdrahtung \\
+    Potentiometer & \platzhalter{Typ ergänzen} & \platzhalter{ergänzen} & \platzhalter{Nennwert} \\
+    DMS-Wägeaufbau & Laboraufbau & \platzhalter{ergänzen} & Mit Temperatursensoren und Heizung \\
+    Messverstärker-Platine & \platzhalter{Bezeichnung} & \platzhalter{ergänzen} & Subtrahier- und Instrumentenverstärker \\
+    Weitere Geräte / Zubehör & \platzhalter{ergänzen} & \platzhalter{ergänzen} & \platzhalter{z. B. Referenzgewichte} \\
+    \bottomrule
+  \end{tabularx}
+  \endgroup
+\end{table}
+% Fotobelege: bilder/used_devices/. Die Messverstaerker-Platine ist in den
+% hier bereitgestellten Geraetefotos nicht eindeutig separat dokumentiert.
 \subsection{Kurze einführende Beschreibung (optional)}
 \subsection{Bestätigung der selbst durchgeführten Messungen und der daraus gewonnenen Ergebnisse}
 \subsection{Unterschriften aller Teilnehmer}
 
 \clearpage
 \section{DC-Messbrücke}
+Ziel dieses Versuchs ist die Bestimmung des parasitären Parallelwiderstands eines Kondensators mit einer DC-Wheatstone-Abgleichmessbrücke.
+Der Parallelwiderstand beschreibt die Leckströme durch das nicht ideal isolierende Dielektrikum.
+
 \subsection{Messschaltung}
+\Cref{fig:wien_bridge} zeigt eine Kapazitätsmessbrücke nach Wien mit zwei Parallel-RC-Zweigen und zwei rein ohmschen Brückenarmen.
+Dabei sind $R_1$ und $C_1$ die einstellbaren Vergleichsgrößen; $R_2$ und $C_2$ beschreiben den zu untersuchenden Kondensator.
+Für die DC-Messung wird der Vergleichskondensator $C_1$ weggelassen.
+Nach dem Einschwingen fließt durch den idealen kapazitiven Anteil von $C_2$ kein Gleichstrom; der Parallelwiderstand $R_2$ bleibt wirksam.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.5\textwidth]{shematics/wien_bridge.png}
+  \caption{Kapazitätsmessbrücke nach Wien; für die DC-Messung wird $C_1$ weggelassen.}
+  \label{fig:wien_bridge}
+\end{figure}
+
+Zum Einstellen des Widerstands $R_1$ stand eine Widerstandsdekade zur Verfügung.
+% Foto der verwendeten Widerstandsdekade hier ergänzen.
+
 \subsection{Wahl der Versorgungsspannung}
+Zur Bestimmung des Parallelwiderstands $R_2$ wurde eine Gleichspannung von $U_S = \SI{15}{\volt}$ gewählt.
+Das Laborskript sieht hierfür eine Versorgungsspannung zwischen \SI{1}{\volt} und \SI{30}{\volt} vor~\cite{laborskript}.
+Bei unveränderten linearen Widerständen bewirkt eine höhere Versorgungsspannung eine größere Diagonalspannung bei gleicher Restverstimmung.
+Dadurch lässt sich eine Abweichung vom Nullpunkt bei gleicher absoluter Spannungsauflösung leichter erkennen.
+Dem stehen eine höhere Verlustleistung und mögliche temperaturbedingte Widerstandsänderungen gegenüber.
+Die Wahl von \SI{15}{\volt} erfolgte als Kompromiss zwischen Abgleichempfindlichkeit und Bauteilbelastung; eine optimale Speisespannung wurde damit nicht nachgewiesen.
+
 \subsection{Bestimmung des Realteils der Impedanz}
+Aus den beiden Spannungsteilern der allgemeinen Vergleichsschaltung folgt für den Abgleich $U_d = 0$ die Bedingung
+\begin{equation}
+  \addxcontentsline{loe}{equation}[\theequation]{Abgleichbedingung der Vergleichsbrücke}
+  R_2 R_3 + j \omega R_1 R_2 R_3 C_1
+  = R_1 R_4 + j \omega R_1 R_2 R_4 C_2.
+  \label{eq:abgleichbedingung}
+\end{equation}
+
+Der Vergleich der Realteile von \cref{eq:abgleichbedingung} liefert
+\begin{equation}
+  \addxcontentsline{loe}{equation}[\theequation]{Berechnung des Parallelwiderstands}
+  R_2 = \frac{R_4}{R_3} R_1.
+  \label{eq:realgleich}
+\end{equation}
+Für die AC-Messung mit $\omega \ne 0$ ergibt der Vergleich der Imaginärteile bei von null verschiedenen Widerständen zusätzlich
+\begin{equation}
+  \addxcontentsline{loe}{equation}[\theequation]{Berechnung der Kapazität bei AC-Abgleich}
+  C_2 = \frac{R_3}{R_4} C_1.
+  \label{eq:imaggleich}
+\end{equation}
+Diese zweite Bedingung wird bei der späteren Kapazitätsmessung verwendet; bei Gleichspannung lässt sich $C_2$ aus dem stationären Abgleich nicht bestimmen.
+
+Für die DC-Messung wird $R_1$ so lange verändert, bis die mit einem Multimeter gemessene Diagonalspannung möglichst nahe bei null liegt.
+Nach Änderungen der Speisung oder der Widerstände muss der Einschwingvorgang abgewartet werden.
+Das Verhältnis von $R_4$ zu $R_3$ wurde so gewählt, dass bei der anschließenden AC-Messung eine mit der vorhandenen Kapazitätsdekade einstellbare Vergleichskapazität verwendet werden kann.
+Die eingesetzten Widerstände waren
+\begin{itemize}
+  \item $R_4 = \SI{470}{\kilo\ohm}$,
+  \item $R_3 = \SI{100.1}{\kilo\ohm}$.
+\end{itemize}
+Daraus ergibt sich das dimensionslose Widerstandsverhältnis
+\[
+  \frac{R_4}{R_3}
+  = \frac{\SI{470}{\kilo\ohm}}{\SI{100.1}{\kilo\ohm}}
+  \approx \num{4.695305}.
+\]
+Für die weiteren Rechnungen wurde das Verhältnis ohne vorzeitiges Runden verwendet.
+
+Da der Einstellbereich der Widerstandsdekade nicht ausreichte, wurde der Vergleichsarm um zwei in Reihe geschaltete Widerstände ergänzt.
+Die beiden Zusatzwiderstände wurden auf einem Steckbrett in Reihe geschaltet.
+Der gemeinsam gemessene Serienwiderstand beträgt $R_{\mathrm{Serie}} = \SI{1330}{\kilo\ohm}$.
+
+Der gesamte Vergleichswiderstand wird mit $R_1' = R_1 + R_{\mathrm{Serie}}$ bezeichnet.
+Bei $R_1' = \SI{1.405}{\mega\ohm}$ wurde eine Restdiagonalspannung von $U_d = \SI{0.01}{\milli\volt}$ gemessen; die Brücke war damit näherungsweise abgeglichen.
+
+In \cref{eq:realgleich} ist für diesen erweiterten Aufbau der gesamte Vergleichswiderstand $R_1'$ einzusetzen.
+Damit ergibt sich aus den angegebenen Widerstandswerten
+\[
+  R_2 = \frac{R_4}{R_3} R_1'
+      = \frac{470}{\num{100.1}}\cdot\SI{1.405}{\mega\ohm}
+      \approx \SI{6.597}{\mega\ohm}.
+\]
+Die Rundung dieses Rechenwerts ersetzt keine Bestimmung der Messunsicherheit.
+
 \subsection{Abhängigkeit von der Versorgungsspannung bei nicht abgeglichener Brücke: Plot und Erklärung}
+Für die Abhängigkeit von der Versorgungsspannung wurde keine Messreihe aufgenommen.
+Ergänzend wurde der Verlauf mit LTspice simuliert und mit MATLAB dargestellt, siehe \cref{fig:dc-bruecke-variable-us}.
+Der Plot zeigt somit keine im Labor aufgenommene Messreihe.
+
+\begin{center}
+\begin{minipage}{0.95\linewidth}
+  \centering
+  \includegraphics[width=\linewidth]{dc_bridge_variable_us.png}
+  \captionsetup{hypcap=false}
+  \captionof{figure}{Abhängigkeit der Differenzspannung von der DC-Versorgungsspannung bei leicht verstimmter Brücke. LTspice-Simulation mit $R_1^{\prime}=\SI{1.405}{\mega\ohm}$, dargestellt mit MATLAB.}
+  \label{fig:dc-bruecke-variable-us}
+\end{minipage}
+\end{center}
+
+Wenn die Widerstände und die Belastung durch das Messgerät gleich bleiben, ist die Differenzspannung $U_d$ proportional zur Versorgungsspannung $U_S$:
+\begin{equation}
+  \addxcontentsline{loe}{equation}[\theequation]{Abhängigkeit der Differenzspannung von der Versorgungsspannung}
+  U_d = k U_S
+  \label{eq:bruecke-spannungsabhaengigkeit}
+\end{equation}
+Der Faktor $k$ hängt von den Widerstandsverhältnissen und dem Eingangswiderstand des Messgeräts ab.
+Bei einer nicht abgeglichenen Brücke steigt der Betrag von $U_d$ somit mit der Versorgungsspannung.
+Bei ideal abgeglichener Brücke bleibt $U_d=0$.
+
+Der Plot zeigt den erwarteten annähernd linearen Anstieg der Differenzspannung mit der Versorgungsspannung.
+In der Simulation wurde der gesamte Vergleichswiderstand mit $R_1'=\SI{1.405}{\mega\ohm}$ eingesetzt.
+Bei $U_S=\SI{15}{\volt}$ beträgt die dargestellte Differenzspannung etwa \SI{0.0329}{\milli\volt}; im Labor wurden \SI{0.01}{\milli\volt} gemessen.
+Die idealisierte Spannungsteilerrechnung ergibt mit den eingetragenen Widerständen einen Betrag von etwa \SI{0.0319}{\milli\volt}.
+Die Simulation liegt damit nahe am idealen Abgleich.
+Schon die Rundung des aus dem DC-Abgleich bestimmten Parallelwiderstands auf $R_2=\SI{6.597}{\mega\ohm}$ führt im Modell zu einer kleinen Restspannung.
+Die verbleibende Abweichung zum Laborwert kann zusätzlich durch die tatsächlichen Widerstandswerte und die Belastung beziehungsweise den Offset des Messgeräts beeinflusst werden; die einzelnen Beiträge wurden nicht getrennt bestimmt.
+
 \subsection{Auswirkung des Innenwiderstands des Messgeräts}
+Die Differenzspannung wurde mit dem Keysight U1232A gemessen.
+Das Voltmeter hat einen endlichen Eingangswiderstand. Solange $U_d$ nicht null ist, fließt daher ein kleiner Strom durch das Messgerät.
+Dadurch sind die beiden Brückenzweige nicht mehr unabhängig voneinander. Die Berechnung mit zwei unbelasteten Spannungsteilern gilt dann nur näherungsweise.
+Die gemessene Differenzspannung fällt durch diese Belastung betragsmäßig kleiner aus als ohne angeschlossenes Messgerät.
+Der Eingangswiderstand sollte deshalb deutlich größer als der von der Messdiagonale aus gesehene Innenwiderstand der Brücke sein.
+
+Bei ideal abgeglichener Brücke ist $U_d=0$, und es fließt kein Strom durch das Voltmeter.
+Ein rein ohmscher Eingangswiderstand verändert daher die ideale Abgleichbedingung nicht.
+Durch die kleinere Anzeige außerhalb des Abgleichs wird es aber schwieriger, eine geringe Verstimmung zu erkennen.
+
+
 
 \clearpage
 \section{AC-Messbrücke}
+Mit der AC-Messbrücke wird die unbekannte Kapazität $C_2$ bestimmt~\cite{laborskript}.
+
 \subsection{Messschaltung}
+Die Schaltung aus der DC-Messung wurde übernommen und um die einstellbare Kapazität $C_1$ parallel zu $R_1'$ erweitert, wie in \cref{fig:wien_bridge} dargestellt.
+Die Widerstände blieben unverändert: $R_3=\SI{100.1}{\kilo\ohm}$, $R_4=\SI{470}{\kilo\ohm}$ und $R_1'=\SI{1.405}{\mega\ohm}$ einschließlich der Zusatzwiderstände.
+Die Brücke wurde mit dem Funktionsgenerator versorgt. Die Differenzspannung wurde mit dem Oszilloskop gemessen.
+
 \subsection{Wahl der Spannung}
+Am Funktionsgenerator wurde eine sinusförmige Spannung von $U_{S,\mathrm{pp}}=\SI{4}{\volt}$ eingestellt.
+Für einen Sinus ohne Gleichanteil entspricht dies einem Effektivwert von etwa \SI{1.41}{\volt}.
+Eine größere Versorgungsspannung macht eine verbleibende Differenzspannung leichter erkennbar, erhöht aber auch die Belastung der Bauteile.
+
 \subsection{Wahl des Frequenzbereichs}
+Für die Messung wurde eine Frequenz von $f=\SI{1}{\kilo\hertz}$ eingestellt.
+Im Gegensatz zur DC-Messung fließt dabei auch durch die Kondensatoren ein Wechselstrom.
+Der kapazitive Blindwiderstand $X_C=-1/(2\pi f C)$ und damit die Empfindlichkeit des Abgleichs hängen von der Frequenz ab.
+Mit der einzelnen Messung wurde kein optimaler Frequenzbereich nachgewiesen.
+
 \subsection{Abgleichbedingung der AC-Messbrücke}
+Für den idealen Abgleich müssen Real- und Imaginärteil der Differenzspannung null sein.
+Aus \cref{eq:abgleichbedingung} folgen für $\omega\neq0$ die beiden Bedingungen
+\[
+  R_2=\frac{R_4}{R_3}R_1',
+  \qquad C_2=\frac{R_3}{R_4}C_1.
+\]
+Der Widerstandsabgleich wurde aus der DC-Messung übernommen. Zum Kapazitätsabgleich wurde $C_1$ eingestellt.
+
 \subsection{Bestimmung der Kapazität}
+Bei einer eingestellten Kapazität von $C_1=\SI{10.6}{\micro\farad}$ wurde am Oszilloskop eine verbleibende Differenzspannung von $U_{\mathrm{diff,rms}}=\SI{10}{\milli\volt}$ gemessen.
+Mit \cref{eq:imaggleich} ergibt sich die unbekannte Kapazität zu
+\begin{equation}
+  \addxcontentsline{loe}{equation}[\theequation]{Berechnung der unbekannten Kapazität}
+  C_2=\frac{R_3}{R_4}C_1
+     =\frac{\num{100.1}}{470}\cdot\SI{10.6}{\micro\farad}
+     \approx\SI{2.26}{\micro\farad}.
+  \label{eq:kapazitaet-ergebnis}
+\end{equation}
+Da die Differenzspannung nicht vollständig null war, ist dies ein Näherungswert aus dem vorgenommenen Abgleich.
+Aus der Restspannung allein lässt sich keine genaue Messunsicherheit für $C_2$ angeben.
 
 \clearpage
 \section{Subtrahierverstärker}
@@ -97,6 +309,10 @@ von GitHub~\cite{vorlage-laborprotokoll}.
   GitHub-Repository.
   \url{https://github.com/bendemaj/Laborprotokoll}.
   Zugriff am 14.~November~2026.
+
+  \bibitem{laborskript}
+  \emph{Messtechnik Labor: Skriptum}, Wintersemester 2026/2027.
+  Abschnitt 3.1.1, S.~29--30 (PDF-S.~33--34).
 
   % Hier später weitere Literaturangaben einfügen.
 \end{thebibliography}

@@ -3,13 +3,40 @@
   "latex-workshop.latex.autoBuild.run": "onSave",
   "latex-workshop.latex.recipe.default": "first",
   "latex-workshop.latex.recipes": [
-    { "name": "Laborprotokoll bauen", "tools": ["projekt-build"] }
+    {
+      "name": "Laborprotokoll bauen",
+      "tools": [
+        "projekt-neubau"
+      ]
+    },
+    {
+      "name": "Laborprotokoll vollstaendig neu bauen",
+      "tools": [
+        "projekt-neubau"
+      ]
+    }
   ],
   "latex-workshop.latex.tools": [
     {
       "name": "projekt-build",
       "command": "/bin/sh",
-      "args": ["%DIR%/scripts/build.sh"]
+      "args": [
+        "%DIR%/scripts/build.sh"
+      ]
+    },
+    {
+      "name": "projekt-neubau",
+      "command": "latexmk",
+      "args": [
+        "-g",
+        "-pdf",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-outdir=%OUTDIR%",
+        "%DOC%"
+      ],
+      "cwd": "%DIR%"
     }
   ],
   "latex-workshop.view.pdf.viewer": "tab",

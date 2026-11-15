@@ -1,0 +1,104 @@
+1 Formalkriterien
+- Titel bzw. Bezeichnung der Teilübung
+
+- Datum, Teilnehmer und Messplatz
+
+- Verwendete Geräte
+
+- ggf. KURZE einführende Beschreibung
+
+- Bestätigung alle Messungen selbst durchgeführt und alle Ergebnisse aus ihren Messungen
+
+- Unterschrift aller Teilnehmer
+
+Höchstbewertung24
+
+2 DC-Messbrücke
+- Messschaltung
+
+- Wahl der Versorgungsspannung
+
+- Bestimmung des Realteils der Impedanz
+
+- Plot und Erklärung zur Abhängigkeit der Versorgungsspannung f. nicht abgeglichene Brücke
+
+- Erklärung zur Auswirkung des Innenwiderstands des Messgeräts
+
+Höchstbewertung10
+
+3 AC-Messbrücke
+- Messschaltung
+
+- Wahl der Spannung
+
+- Wahl Frequenzbereich
+
+- Abgleichbedingung AC-Messbrücke
+
+- Bestimmung der Kapazität
+
+Höchstbewertung15
+
+4 Subtrahierverstärker
+- Berechnung Widerstandswerte
+
+- Verstärkungsmessung
+
+- Offsetmessung + Eingangs-Offset
+
+- CMRR-Messung (bzw. -berechnung)
+
+- Messung Rauschspannung
+
+Höchstbewertung15
+
+5 Instrumentenverstärker
+- Berechnung Gain-Widerstand
+
+- Verstärkungsmessung
+
+- Offset-Messung + Eingangs-Offset
+
+- CMRR-Messung (bzw. -berechnung)
+
+- Vergleich Subtrahier- und Instrumentenverstärker
+
+Höchstbewertung10
+
+6 Gewichtsmessung mit Halbbrücke
+- Berechnung der Sensitivität (Aufgabe 3.4)
+
+- Messung der Sensitivität + Plot
+
+- Offset-Messung
+
+- Messung Handy-Gewicht
+
+- Vergleich mit Waage
+
+Höchstbewertung10
+
+7 Temeratursensitivität Halbbrücke
+- Messung RMS-Rauschspannung
+
+- Plot Verstärkung über T
+
+- Plot Rauschspannung über T
+
+Höchstbewertung6
+
+8 Vollbrücke
+- Sensitivitätsmessung + Vergleich Halbbrücke
+
+- Temperaturabhängigkeit
+
+- Plot Rauschspannung über Temperatur
+
+Höchstbewertung6
+
+9 Tiefpassfilter zur Rauschunterdrückung
+- Messung der gefilterten Rauschspannung
+
+- Erklärung der Rauschquellen
+
+Höchstbewertung4
