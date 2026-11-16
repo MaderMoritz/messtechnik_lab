@@ -288,8 +288,8 @@ Der zweite Wert entspricht gerundet den angegebenen \SI{10}{\milli\volt}; ein vo
 \clearpage
 \section{Subtrahierverstärker}
 Der Subtrahierverstärker wurde nach Abschnitt 3.2.1 des Laborskripts aufgebaut und untersucht~\cite{laborskript}.
-Die bipolare Versorgung wurde auf $\pm\SI{15}{\volt}$ und die Strombegrenzung auf \SI{250}{\milli\ampere} eingestellt.
-Damit wurde von der im Skript vorgesehenen Versorgung mit $\pm\SI{12}{\volt}$ abgewichen.
+Die bipolare Versorgung wurde auf $\pm\SI{12}{\volt}$ und die Strombegrenzung auf \SI{250}{\milli\ampere} eingestellt.
+
 
 \subsection{Berechnung der Widerstandswerte}
 In der Hausaufgabe wurde für die Halbbrücke eine maximale Differenzspannung von $U_{d,\mathrm{max}}=\SI{0.25}{\milli\volt}$ berechnet.
@@ -337,7 +337,6 @@ Damit ergibt sich
 \end{equation}
 Dies liegt um \SI{5.5}{\percent} über dem nominalen Wert 1000 und um etwa \SI{3.7}{\percent} über der Erwartung aus den gemessenen Widerständen.
 Die Widerstandswerte erklären somit einen Teil der Abweichung.
-Da für die Eingangsspannung die Generatoreinstellung verwendet wurde, kann auch deren Abweichung von der tatsächlichen Spannung am Verstärkereingang das Ergebnis beeinflussen.
 
 \begin{center}
 \begin{minipage}{0.82\linewidth}
@@ -352,7 +351,7 @@ Da für die Eingangsspannung die Generatoreinstellung verwendet wurde, kann auch
 \subsection{Offsetmessung und Eingangs-Offset}
 % TODO: Schaltbild der tatsaechlichen Offset-Messbeschaltung ergaenzen.
 Für diese Messung wurden beide Eingänge kurzgeschlossen und gemeinsam mit Masse verbunden.
-Am Ausgang wurde ein Offsetbetrag von $U_{a,\mathrm{os}}=\SI{522.5}{\milli\volt}$ gemessen; dazu liegt kein Oszilloskopbild vor.
+Am Ausgang wurde ein Offsetbetrag von $U_{a,\mathrm{os}}=\SI{522.5}{\milli\volt}$ gemessen.
 Auf die gemessene Differenzverstärkung bezogen entspricht dies
 \begin{equation}
   \addxcontentsline{loe}{equation}[\theequation]{Auf den Eingang bezogener Offset des Subtrahierverstärkers}
@@ -363,7 +362,16 @@ Auf die gemessene Differenzverstärkung bezogen entspricht dies
 \end{equation}
 Der Ausgangsoffset ist damit größer als das für die Halbbrücke berechnete Nutzsignal von \SI{0.25}{\volt}.
 Er muss bei einer späteren Brückenmessung als Nullpunkt berücksichtigt werden.
-Der berechnete Eingangsbezug beschreibt den gesamten gemessenen Offset; der reine OPV-Offset und Beiträge der Eingangsströme wurden nicht getrennt bestimmt.
+
+Das Datenblatt des TLV170 nennt bei \SI{25}{\celsius} eine typische Eingangs-Offsetspannung von \SI{0.5}{\milli\volt} und einen Grenzwert von $\pm\SI{2.5}{\milli\volt}$~\cite{tlv170-datenblatt}.
+Im vereinfachten DC-Modell wird der interne OPV-Spannungsoffset mit der Rauschverstärkung $1+R_2/R_1\approx1018$ auf den Ausgang übertragen.
+Der typische Wert würde somit einen Ausgangsoffset von etwa \SI{0.509}{\volt} verursachen und erklärt die Größenordnung der separat gemessenen \SI{522.5}{\milli\volt} plausibel.
+Ein solcher interner Offset wirkt auch ohne angeschlossene Brücke und ohne Gleichanteil des Generatorsignals.
+
+Bei der Sinusmessung in \cref{fig:sub-verstaerkung} ist eine größere Gleichspannungsverschiebung erkennbar.
+Bei sonst gleichen Betriebsbedingungen wäre auch dort eine ähnliche Ausgangsmittellage wie bei der separaten Offsetmessung zu erwarten.
+Die Abweichung zwischen beiden Messungen konnte anhand der dokumentierten Messbedingungen nicht eindeutig geklärt werden.
+Eine alleinige Verursachung durch den OPV-Offset und die Einhaltung seiner Datenblattspezifikation lassen sich daraus nicht nachweisen.
 
 \subsection{CMRR-Messung beziehungsweise Berechnung}
 % TODO: Schaltbild der CMRR-Messbeschaltung ergaenzen.
@@ -380,13 +388,13 @@ zu bestimmen.
 Da keine Ausgangsänderung aufgelöst und keine Nachweisgrenze festgehalten wurde, lässt sich kein belastbarer Zahlenwert für die CMRR angeben.
 Dies bedeutet nicht, dass $G_{\mathrm{cm}}$ exakt null oder die CMRR unendlich ist.
 
-\clearpage
+
 \subsection{Messung der Rauschspannung}
-% TODO: Schaltbild nach Klaerung der tatsaechlichen Eingangsbeschaltung ergaenzen.
-Die Rauschspannung wurde am Ausgang mit AC-Kopplung gemessen.
-Das Oszilloskop zeigt einen AC-RMS-Wert von \SI{1.409}{\milli\volt}, also gerundet \SI{1.4}{\milli\volt}, siehe \cref{fig:sub-rauschen}.
-Die Eingangsbeschaltung während dieser Messung ist nicht mehr bekannt.
-Der Wert wird deshalb als Rauschmessung des verwendeten Aufbaus angegeben; eine Zuordnung zum Verstärker allein ist damit nicht möglich.
+% TODO: Schaltbild der Rauschmessung mit beiden Eingaengen auf Masse ergaenzen.
+Für die Rauschmessung wurden beide Eingänge auf Masse gelegt.
+Am Ausgang wurde der Rauschanteil mit dem Oszilloskop bei AC-Kopplung als Effektivwert gemessen.
+Das Oszilloskop zeigt einen AC-RMS-Wert von \SI{1.409}{\milli\volt}, siehe \cref{fig:sub-rauschen}.
+Der Wert beschreibt das Rauschen des verwendeten Aufbaus einschließlich der Messkette.
 
 \begin{center}
 \begin{minipage}{0.82\linewidth}
@@ -444,6 +452,11 @@ Der Wert wird deshalb als Rauschmessung des verwendeten Aufbaus angegeben; eine 
   \bibitem{laborskript}
   \emph{Messtechnik Labor: Skriptum}, Wintersemester 2026/2027.
   Abschnitte 3.1--3.2, S.~29--33 (PDF-S.~33--37).
+
+  \bibitem{tlv170-datenblatt}
+  Texas Instruments: \emph{TLVx170 36-V, Single-Supply, EMI-Hardened, Low-Power Operational Amplifiers for Cost-Sensitive Systems}.
+  Datenblatt SBOS782A, Revision Mai 2018, Abschnitt~6.7, S.~9.
+  \url{https://www.ti.com/lit/ds/symlink/tlv170.pdf}.
 
   % Hier später weitere Literaturangaben einfügen.
 \end{thebibliography}
