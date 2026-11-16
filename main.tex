@@ -408,11 +408,142 @@ Der Wert beschreibt das Rauschen des verwendeten Aufbaus einschließlich der Mes
 
 \clearpage
 \section{Instrumentenverstärker}
+Der Instrumentenverstärker LT1167 wurde nach Abschnitt 3.2.2 des Laborskripts untersucht~\cite{laborskript}.
+Die Versorgungsspannung betrug $\pm\SI{12}{\volt}$.
+
 \subsection{Berechnung des Gain-Widerstands}
+Für die gewählte Sollverstärkung $G_{\mathrm{DM,soll}}=1500$ ergibt sich mit der Verstärkungsformel des Laborskripts
+\begin{equation}
+  \addxcontentsline{loe}{equation}[\theequation]{Dimensionierung des Gain-Widerstands des Instrumentenverstärkers}
+  G=1+\frac{\SI{49.4}{\kilo\ohm}}{R_G},
+  \qquad
+  R_{G,\mathrm{soll}}=\frac{\SI{49.4}{\kilo\ohm}}{1500-1}
+  \approx\SI{32.96}{\ohm}.
+  \label{eq:instr-rg-soll}
+\end{equation}
+Der tatsächlich eingesetzte Widerstand wurde mit $R_G=\SI{35.7}{\ohm}$ gemessen.
+Daraus folgt die erwartete Verstärkung
+\begin{equation}
+  \addxcontentsline{loe}{equation}[\theequation]{Erwartete Verstärkung aus dem gemessenen Gain-Widerstand}
+  G_{\mathrm{erw}}=1+\frac{\SI{49.4}{\kilo\ohm}}{\SI{35.7}{\ohm}}
+  \approx\num{1384.75}.
+  \label{eq:instr-gain-erwartet}
+\end{equation}
+Die Erwartung liegt damit bereits aufgrund des eingesetzten Widerstands unter der gewählten Sollverstärkung.
+
 \subsection{Verstärkungsmessung}
+Der Funktionsgenerator wurde auf einen Sinus mit \SI{4}{\milli\volt} Spitze-Spitze-Spannung und \SI{1}{\kilo\hertz} eingestellt.
+Kanal 2 des Oszilloskops erfasste das Eingangssignal, Kanal 1 das Ausgangssignal.
+In \cref{fig:instr-verstaerkung} sind $U_{e,\mathrm{pp}}=\SI{4.3}{\milli\volt}$ und $U_{a,\mathrm{pp}}=\SI{5.8}{\volt}$ ablesbar.
+Für die Auswertung wurden die beiden gemessenen Amplituden verwendet:
+\begin{equation}
+  \addxcontentsline{loe}{equation}[\theequation]{Gemessene Differenzverstärkung des Instrumentenverstärkers}
+  G_{\mathrm{dm,mess}}=\frac{U_{a,\mathrm{pp}}}{U_{e,\mathrm{pp}}}
+  =\frac{\SI{5.8}{\volt}}{\SI{4.3}{\milli\volt}}
+  \approx\num{1348.84}.
+  \label{eq:instr-gain-mess}
+\end{equation}
+Der gemessene Wert liegt etwa \SI{2.6}{\percent} unter der Erwartung aus dem gemessenen Widerstand und etwa \SI{10.1}{\percent} unter dem Sollwert 1500.
+Der Quotient aus Ausgangsspannung und bloßer Generatoreinstellung würde dagegen 1450 ergeben.
+Die Abweichung der eingestellten von der tatsächlich gemessenen Eingangsspannung beeinflusst somit die Auswertung deutlich.
+
+
+\begin{center}
+\begin{minipage}{0.82\linewidth}
+  \centering
+  \includegraphics[width=\linewidth]{WhatsApp Unknown 2026-11-14 at 13.36.28/3_2_2_verstaerkung_instr.jpeg}
+  \captionsetup{hypcap=false}
+  \captionof{figure}{Verstärkungsmessung des Instrumentenverstärkers bei \SI{1}{\kilo\hertz}. Kanal 1 zeigt \SI{5.8}{\volt}, Kanal 2 \SI{4.3}{\milli\volt}, jeweils Spitze-Spitze.}
+  \label{fig:instr-verstaerkung}
+\end{minipage}
+\end{center}
+
 \subsection{Offsetmessung und Eingangs-Offset}
+% TODO: Schaltbild der Offsetmessung mit beiden Eingaengen auf Masse ergaenzen.
+Beide Eingänge wurden kurzgeschlossen und gemeinsam auf Masse gelegt.
+Der am Ausgang gemessene Mittelwert betrug $U_{a,\mathrm{os}}=-\SI{11.76}{\milli\volt}$, siehe \cref{fig:instr-offset}.
+Mit der gemessenen Signalverstärkung ergibt sich näherungsweise der äquivalente Eingangs-Offset
+\begin{equation}
+  \addxcontentsline{loe}{equation}[\theequation]{Äquivalenter Eingangs-Offset des Instrumentenverstärkers}
+  U_{e,\mathrm{os,eq}}=\frac{U_{a,\mathrm{os}}}{G_{\mathrm{dm,mess}}}
+  \approx\frac{-\SI{11.76}{\milli\volt}}{\num{1348.84}}
+  \approx-\SI{8.72}{\micro\volt}.
+  \label{eq:instr-offset-eingang}
+\end{equation}
+Der Wert bezieht den gesamten gemessenen Ausgangsoffset auf den Eingang; einzelne interne Fehlerbeiträge werden damit nicht getrennt bestimmt.
+Die Verwendung der bei \SI{1}{\kilo\hertz} gemessenen Verstärkung für diesen DC-Eingangsbezug ist eine Näherung.
+Dem Mittelwert überlagert war ein deutlich sichtbarer periodischer Störanteil.
+Das Oszilloskop zeigt dafür etwa \SI{49.84}{\hertz} und insgesamt \SI{33}{\milli\volt} Spitze-Spitze.
+Die Frequenz nahe \SI{50}{\hertz} deutet auf eine mögliche Netzeinkopplung hin.
+Die Spitze-Spitze-Spannung dieses Verlaufs ist vom DC-Offset und vom Rauscheffektivwert zu unterscheiden.
+
+\begin{center}
+\begin{minipage}{0.82\linewidth}
+  \centering
+  \includegraphics[width=\linewidth]{WhatsApp Unknown 2026-11-14 at 13.36.28/3_2_2_offset_isntr.jpeg}
+  \captionsetup{hypcap=false}
+  \captionof{figure}{Offsetmessung des Instrumentenverstärkers bei auf Masse gelegten Eingängen. Der Ausgangsmittelwert beträgt $-\SI{11.76}{\milli\volt}$; sichtbar ist ein überlagerter Störanteil mit etwa \SI{49.84}{\hertz}.}
+  \label{fig:instr-offset}
+\end{minipage}
+\end{center}
+
 \subsection{CMRR-Messung beziehungsweise Berechnung}
+% TODO: Schaltbild der CMRR-Messbeschaltung ergaenzen.
+Die Gleichtaktmessung wurde analog zur Messung am Subtrahierverstärker durchgeführt.
+Bei gemeinsam angesteuerten Eingängen war keine Änderung der Ausgangsspannung erkennbar.
+Da keine Nachweisgrenze festgehalten wurde, konnten weder eine Gleichtaktverstärkung noch ein belastbarer Zahlenwert der CMRR bestimmt werden.
+Aus der fehlenden erkennbaren Änderung folgt keine unendliche Gleichtaktunterdrückung.
+
+\subsection{Messung der Rauschspannung}
+% TODO: Schaltbild der Rauschmessung mit beiden Eingaengen auf Masse ergaenzen.
+Für die Rauschmessung wurden beide Eingänge auf Masse gelegt.
+Am Ausgang wurde mit AC-Kopplung der Effektivwert des Rauschanteils gemessen.
+Die Anzeige in \cref{fig:instr-rauschen} beträgt \SI{1.960}{\milli\volt} AC-RMS.
+Dieser Wert beschreibt das Rauschen einschließlich der im Messband enthaltenen Störungen und des Beitrags der Messkette.
+
+\begin{center}
+\begin{minipage}{0.82\linewidth}
+  \centering
+  \includegraphics[width=\linewidth]{WhatsApp Unknown 2026-11-14 at 13.36.28/3_2_2_rauschrms_instr.jpeg}
+  \captionsetup{hypcap=false}
+  \captionof{figure}{Rauschmessung des Instrumentenverstärkers bei auf Masse gelegten Eingängen und AC-Kopplung. Der angezeigte AC-RMS-Wert beträgt \SI{1.960}{\milli\volt}.}
+  \label{fig:instr-rauschen}
+\end{minipage}
+\end{center}
+
 \subsection{Vergleich von Subtrahier- und Instrumentenverstärker}
+\Cref{tab:verstaerker-vergleich} stellt die ermittelten Kennwerte gegenüber.
+Beide Schaltungen wurden mit $\pm\SI{12}{\volt}$ versorgt.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+\centering
+\captionsetup{hypcap=false}
+\captionof{table}{Vergleich der gemessenen Verstärkerkennwerte. Die Eingangs-Offsetwerte sind näherungsweise auf die jeweilige Signalverstärkung bezogen.}
+\label{tab:verstaerker-vergleich}
+\begin{tabularx}{\linewidth}{@{}Xll@{}}
+  \toprule
+  Größe & Subtrahierer & Instrumentenverstärker \\
+  \midrule
+  Sollverstärkung & 1000 & 1500 \\
+  Erwartung aus Widerstandsmessung & $\approx1017$ & $\approx1385$ \\
+  Gemessene Signalverstärkung & 1055 & $\approx1349$ \\
+  Messfrequenz & \SI{2}{\kilo\hertz} & \SI{1}{\kilo\hertz} \\
+  Ausgangsoffset & \SI{522.5}{\milli\volt} & $-\SI{11.76}{\milli\volt}$ \\
+  Äquivalenter Eingangs-Offset & $\approx\SI{495}{\micro\volt}$ & $\approx-\SI{8.72}{\micro\volt}$ \\
+  Ausgangsrauschen (AC-RMS) & \SI{1.409}{\milli\volt} & \SI{1.960}{\milli\volt} \\
+  CMRR & nicht quantifizierbar & nicht quantifizierbar \\
+  \bottomrule
+\end{tabularx}
+\end{minipage}
+\end{center}
+
+Der Instrumentenverstärker zeigte in der Nullmessung einen deutlich kleineren Ausgangsoffsetbetrag.
+Auch nach dem näherungsweisen Eingangsbezug bleibt der Offsetbetrag deutlich kleiner.
+Die Verstärkungswerte sind nur eingeschränkt direkt vergleichbar: Beim Subtrahierer wurde die Generatoreinstellung als Eingangsamplitude verwendet, beim Instrumentenverstärker die Anzeige von Kanal 2; außerdem unterscheiden sich die Messfrequenzen.
+Das höhere gemessene Ausgangsrauschen des Instrumentenverstärkers erlaubt allein keine Aussage über ein höheres intrinsisches Rauschen.
+Dafür müssten insbesondere die unterschiedlichen Verstärkungen, die Messbandbreiten und die enthaltenen Störanteile berücksichtigt werden.
+Ein quantitativer Vergleich der CMRR ist mit den vorliegenden Beobachtungen nicht möglich.
 
 \clearpage
 \section{Gewichtsmessung mit Halbbrücke}
@@ -451,7 +582,7 @@ Der Wert beschreibt das Rauschen des verwendeten Aufbaus einschließlich der Mes
 
   \bibitem{laborskript}
   \emph{Messtechnik Labor: Skriptum}, Wintersemester 2026/2027.
-  Abschnitte 3.1--3.2, S.~29--33 (PDF-S.~33--37).
+  Abschnitte 3.1--3.2, S.~29--34 (PDF-S.~33--38).
 
   \bibitem{tlv170-datenblatt}
   Texas Instruments: \emph{TLVx170 36-V, Single-Supply, EMI-Hardened, Low-Power Operational Amplifiers for Cost-Sensitive Systems}.
