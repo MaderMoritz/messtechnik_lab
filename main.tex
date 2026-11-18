@@ -327,7 +327,6 @@ Für die Differenzverstärkung ist daraus näherungsweise ein Wert von 1017 zu e
 \subsection{Verstärkungsmessung}
 Der Funktionsgenerator wurde auf eine Spitze-Spitze-Spannung von $U_{e,\mathrm{pp}}=\SI{4}{\milli\volt}$ bei $f=\SI{2}{\kilo\hertz}$ eingestellt.
 Am Ausgang wurden $U_{a,\mathrm{pp}}=\SI{4.22}{\volt}$ gemessen, siehe \cref{fig:sub-verstaerkung}.
-Die Anzeige bezeichnet einen Spitze-Spitze-Wert und keinen Scheitelwert.
 Damit ergibt sich
 \begin{equation}
   \addxcontentsline{loe}{equation}[\theequation]{Gemessene Differenzverstärkung des Subtrahierverstärkers}
@@ -355,17 +354,17 @@ Am Ausgang wurde ein Offsetbetrag von $U_{a,\mathrm{os}}=\SI{522.5}{\milli\volt}
 Auf die gemessene Differenzverstärkung bezogen entspricht dies
 \begin{equation}
   \addxcontentsline{loe}{equation}[\theequation]{Auf den Eingang bezogener Offset des Subtrahierverstärkers}
-  U_{e,\mathrm{os,eq}}=\frac{U_{a,\mathrm{os}}}{G_{\mathrm{dm,mess}}}
+  U_{e,\mathrm{os}}=\frac{U_{a,\mathrm{os}}}{G_{\mathrm{dm,mess}}}
   =\frac{\SI{522.5}{\milli\volt}}{1055}
   \approx\SI{0.495}{\milli\volt}.
   \label{eq:sub-offset-eingang}
 \end{equation}
 Der Ausgangsoffset ist damit größer als das für die Halbbrücke berechnete Nutzsignal von \SI{0.25}{\volt}.
-Er muss bei einer späteren Brückenmessung als Nullpunkt berücksichtigt werden.
+Er muss bei einer späteren Brückenmessung berücksichtigt werden.
 
 Das Datenblatt des TLV170 nennt bei \SI{25}{\celsius} eine typische Eingangs-Offsetspannung von \SI{0.5}{\milli\volt} und einen Grenzwert von $\pm\SI{2.5}{\milli\volt}$~\cite{tlv170-datenblatt}.
 Im vereinfachten DC-Modell wird der interne OPV-Spannungsoffset mit der Rauschverstärkung $1+R_2/R_1\approx1018$ auf den Ausgang übertragen.
-Der typische Wert würde somit einen Ausgangsoffset von etwa \SI{0.509}{\volt} verursachen und erklärt die Größenordnung der separat gemessenen \SI{522.5}{\milli\volt} plausibel.
+Der typische Wert würde somit einen Ausgangsoffset von etwa \SI{0.509}{\volt} verursachen und erklärt die Größenordnung der separat gemessenen \SI{522.5}{\milli\volt}.
 Ein solcher interner Offset wirkt auch ohne angeschlossene Brücke und ohne Gleichanteil des Generatorsignals.
 
 Bei der Sinusmessung in \cref{fig:sub-verstaerkung} ist eine größere Gleichspannungsverschiebung erkennbar.
@@ -470,7 +469,7 @@ Mit der gemessenen Signalverstärkung ergibt sich näherungsweise der äquivalen
   \approx-\SI{8.72}{\micro\volt}.
   \label{eq:instr-offset-eingang}
 \end{equation}
-Der Wert bezieht den gesamten gemessenen Ausgangsoffset auf den Eingang; einzelne interne Fehlerbeiträge werden damit nicht getrennt bestimmt.
+Der Wert bezieht den gesamten gemessenen Ausgangsoffset auf den Eingang.
 Die Verwendung der bei \SI{1}{\kilo\hertz} gemessenen Verstärkung für diesen DC-Eingangsbezug ist eine Näherung.
 Dem Mittelwert überlagert war ein deutlich sichtbarer periodischer Störanteil.
 Das Oszilloskop zeigt dafür etwa \SI{49.84}{\hertz} und insgesamt \SI{33}{\milli\volt} Spitze-Spitze.
@@ -499,7 +498,6 @@ Aus der fehlenden erkennbaren Änderung folgt keine unendliche Gleichtaktunterdr
 Für die Rauschmessung wurden beide Eingänge auf Masse gelegt.
 Am Ausgang wurde mit AC-Kopplung der Effektivwert des Rauschanteils gemessen.
 Die Anzeige in \cref{fig:instr-rauschen} beträgt \SI{1.960}{\milli\volt} AC-RMS.
-Dieser Wert beschreibt das Rauschen einschließlich der im Messband enthaltenen Störungen und des Beitrags der Messkette.
 
 \begin{center}
 \begin{minipage}{0.82\linewidth}
@@ -519,7 +517,7 @@ Beide Schaltungen wurden mit $\pm\SI{12}{\volt}$ versorgt.
 \begin{minipage}{\linewidth}
 \centering
 \captionsetup{hypcap=false}
-\captionof{table}{Vergleich der gemessenen Verstärkerkennwerte. Die Eingangs-Offsetwerte sind näherungsweise auf die jeweilige Signalverstärkung bezogen.}
+\captionof{table}{Vergleich der gemessenen Verstärkerkennwerte.}
 \label{tab:verstaerker-vergleich}
 \begin{tabularx}{\linewidth}{@{}Xll@{}}
   \toprule
@@ -540,18 +538,145 @@ Beide Schaltungen wurden mit $\pm\SI{12}{\volt}$ versorgt.
 
 Der Instrumentenverstärker zeigte in der Nullmessung einen deutlich kleineren Ausgangsoffsetbetrag.
 Auch nach dem näherungsweisen Eingangsbezug bleibt der Offsetbetrag deutlich kleiner.
-Die Verstärkungswerte sind nur eingeschränkt direkt vergleichbar: Beim Subtrahierer wurde die Generatoreinstellung als Eingangsamplitude verwendet, beim Instrumentenverstärker die Anzeige von Kanal 2; außerdem unterscheiden sich die Messfrequenzen.
-Das höhere gemessene Ausgangsrauschen des Instrumentenverstärkers erlaubt allein keine Aussage über ein höheres intrinsisches Rauschen.
-Dafür müssten insbesondere die unterschiedlichen Verstärkungen, die Messbandbreiten und die enthaltenen Störanteile berücksichtigt werden.
 Ein quantitativer Vergleich der CMRR ist mit den vorliegenden Beobachtungen nicht möglich.
 
 \clearpage
 \section{Gewichtsmessung mit Halbbrücke}
+Für die Gewichtsmessung wurde die vorhandene DMS-Vollbrücke als Halbbrücke verwendet.
+Die Brücke wurde über die Anschlüsse 1 und 2 gespeist; das Messsignal wurde an Anschluss 3 abgegriffen.
+Der zweite Brückenzweig wurde mit einem Potentiometer ergänzt.
+Die beiden Teilwiderstände wurden auf jeweils \SI{1.04}{\kilo\ohm} eingestellt.
+\Cref{fig:halbbruecke-aufbau} zeigt den DMS-Wägeaufbau und das verwendete Potentiometer.
+Der Instrumentenverstärker wurde mit $\pm\SI{12}{\volt}$ versorgt.
+Als Gain-Widerstand wurde weiterhin $R_G=\SI{35.7}{\ohm}$ verwendet.
+Die Brücke wurde zwischen $+\SI{12}{\volt}$ und $-\SI{12}{\volt}$ an den Anschlüssen 1 und 2 gespeist.
+Damit betrug die Brückenspeisespannung $U_B=\SI{24}{\volt}$.
+Der Aufbau blieb während der Referenz- und Handymessungen unverändert.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+  \centering
+  \includegraphics[height=55mm]{used_devices/scale.jpg}\hfill
+  \raisebox{\depth}{\includegraphics[width=55mm,angle=-90]{used_devices/poti.jpg}}
+  \captionsetup{hypcap=false}
+  \captionof{figure}{DMS-Wägeaufbau (links) und Potentiometer zur Ergänzung des zweiten Brückenzweigs (rechts).}
+  \label{fig:halbbruecke-aufbau}
+\end{minipage}
+\end{center}
+
 \subsection{Berechnung der Sensitivität (Aufgabe 3.4)}
+Die Halbbrücke besteht aus zwei aktiven DMS und den beiden Teilwiderständen des Potentiometers~\cite{laborskript}.
+Für die Rechnung werden gleich große, entgegengesetzte Widerstandsänderungen $R_0+\Delta R$ und $R_0-\Delta R$ im DMS-Zweig angenommen.
+Der Nominalwiderstand der DMS beträgt $R_0=\SI{1}{\kilo\ohm}$.
+Der gleichmäßig geteilte Potentiometerzweig liefert die halbe Brückenspeisespannung $U_B/2$.
+Bei hochohmiger Abnahme und einer Messrichtung mit positivem Ausgang bei zunehmender Belastung gilt im idealen Modell
+\begin{equation}
+  \addxcontentsline{loe}{equation}[\theequation]{Differenzspannung der DMS-Halbbrücke}
+  U_d=\frac{U_B}{2}-U_B\frac{R_0-\Delta R}{2R_0}
+  =\frac{U_B}{2R_0}\Delta R.
+  \label{eq:halbbruecke-differenz}
+\end{equation}
+Ein Vertauschen der Verstärkereingänge kehrt das Vorzeichen um.
+Mit der aus $R_G$ berechneten Verstärkung $G\approx\num{1384.75}$ aus \cref{eq:instr-gain-erwartet} folgt die theoretische Sensitivität bezüglich der Widerstandsänderung
+\begin{equation}
+  \addxcontentsline{loe}{equation}[\theequation]{Sensitivität der Halbbrücke bezüglich der DMS-Widerstandsänderung}
+  S_{\Delta R}=\frac{\partial U_a}{\partial(\Delta R)}
+  =G\frac{U_B}{2R_0}.
+  \label{eq:halbbruecke-sensitivitaet-widerstand}
+\end{equation}
+Die Einheit ist Volt pro Ohm.
+Mit $U_B=\SI{24}{\volt}$ ergibt sich $S_{\Delta R}\approx\SI{16.62}{\volt\per\ohm}$.
+Die numerische Berechnung der Verstärkung und dieser Sensitivität wurde in MATLAB durchgeführt.
+Für die Sensitivität bezüglich der Masse wird zusätzlich die Widerstandsänderung pro Masse benötigt.
+Diese ist nicht bekannt, deshalb wird die gesamte Messkette mit Referenzgewichten kalibriert.
+
 \subsection{Messung der Sensitivität und Plot}
+Die Referenzgewichte wurden nacheinander aufgelegt und die Ausgangsspannungen des Instrumentenverstärkers gemessen.
+Aus Zeitgründen wurden nur die fünf Referenzgewichte von \SI{500}{\gram} bis \SI{900}{\gram} in Schritten von \SI{100}{\gram} gemessen.
+Die Messwerte sind in \cref{tab:halbbruecke-gewichte} angegeben.
+
+\begin{center}
+\begin{minipage}{0.65\linewidth}
+  \centering
+  \captionsetup{hypcap=false}
+  \captionof{table}{Referenzmassen und gemessene Ausgangsspannungen der Halbbrücke.}
+  \label{tab:halbbruecke-gewichte}
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    Masse $m$ & Ausgangsspannung $U_a$ \\
+    \midrule
+    \SI{500}{\gram} & \SI{1.92}{\volt} \\
+    \SI{600}{\gram} & \SI{2.13}{\volt} \\
+    \SI{700}{\gram} & \SI{2.29}{\volt} \\
+    \SI{800}{\gram} & \SI{2.46}{\volt} \\
+    \SI{900}{\gram} & \SI{2.64}{\volt} \\
+    \bottomrule
+  \end{tabular}
+\end{minipage}
+\end{center}
+
+Zusätzlich wurde die in der Offsetmessung bestimmte Ausgangsspannung von \SI{610}{\milli\volt} bei $m=0$ einbezogen.
+Die Brücke war bei dieser Messung mit \SI{24}{\volt} gespeist und unbelastet.
+Die gesamte numerische Auswertung der Messdaten und die grafische Darstellung wurden in MATLAB durchgeführt.
+An die insgesamt sechs Punkte wurde dort mit der Methode der kleinsten Quadrate eine Gerade $U_a=S_m m+b$ angepasst.
+Steigung und Achsenabschnitt wurden dabei frei bestimmt.
+Es ergibt sich
+\begin{equation}
+  \addxcontentsline{loe}{equation}[\theequation]{Experimentelle Kalibriergerade der Halbbrücke}
+  U_a(m)\approx\left(\SI{2.274}{\milli\volt\per\gram}\right)m+\SI{0.682}{\volt},
+  \qquad S_m\approx\SI{2.274}{\milli\volt\per\gram}.
+  \label{eq:halbbruecke-kalibrierung}
+\end{equation}
+Die Sensitivität bezieht sich auf die gesamte Messkette aus Brücke und Verstärker.
+Die Gerade wird nicht zum Durchgang durch den gemessenen Nullpunkt gezwungen.
+Deshalb unterscheidet sich ihr Achsenabschnitt $b\approx\SI{0.682}{\volt}$ von den gemessenen \SI{0.610}{\volt}.
+Die größte Abweichung eines Kalibrierpunkts von dieser Geraden beträgt etwa \SI{0.101}{\volt}.
+Werden nur die fünf belasteten Referenzpunkte verwendet, ergeben sich dagegen $S_m=\SI{1.770}{\milli\volt\per\gram}$ und ein extrapolierter Achsenabschnitt von \SI{1.049}{\volt}.
+Die zusätzliche Nullmessung beeinflusst die Ausgleichsgerade somit deutlich.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+  \centering
+  \includegraphics[width=0.8\linewidth]{gewichtsmessung/regression_gewichtsmessung.png}
+  \captionsetup{hypcap=false}
+  \captionof{figure}{Kalibrierpunkte und lineare Ausgleichsgerade der Halbbrücke einschließlich der Nullmessung von \SI{610}{\milli\volt}. In blau ist die Gerade allein aus den belasteten Referenzpunkten dargestellt, in rot mit dem Nullpunkt (m = 0). Die Handymessung bei \SI{1.13}{\volt} verwendet die Masse der Vergleichswaage.}
+  \label{fig:halbbruecke-kalibrierung}
+\end{minipage}
+\end{center}
+
 \subsection{Offsetmessung}
+Bei unbelasteter Waage wurde am Verstärkerausgang eine Spannung von \SI{610}{\milli\volt} gemessen.
+Die Brücke blieb dabei mit \SI{24}{\volt} gespeist und mit dem Instrumentenverstärker verbunden.
+Dieser Messpunkt ist in \cref{fig:halbbruecke-kalibrierung} gesondert gekennzeichnet.
+Der Wert erfasst den Gesamtnullpunkt aus Brücke, Verstärker und Messkette.
+Ursachen können eine anfängliche Brückenverstimmung und der Verstärkeroffset sein.
+Die \SI{610}{\milli\volt} sind deshalb nicht mit dem separat bestimmten Ausgangsoffset des Instrumentenverstärkers bei kurzgeschlossenen Eingängen gleichzusetzen.
+Die Messung ohne Masse wurde gemeinsam mit den fünf belasteten Referenzpunkten für die Kalibrierung verwendet.
+
 \subsection{Messung des Handy-Gewichts}
+Mit aufgelegtem Handy wurde am Verstärkerausgang $U_{a,\mathrm{Handy}}=\SI{1.13}{\volt}$ gemessen.
+Die Umkehrung der Kalibriergeraden einschließlich der Nullmessung liefert
+\begin{equation}
+  \addxcontentsline{loe}{equation}[\theequation]{Aus der Kalibriergeraden mit Nullmessung berechnete Handymasse}
+  m_{\mathrm{Handy}}=\frac{U_{a,\mathrm{Handy}}-b}{S_m}
+  \approx\frac{\SI{1.13}{\volt}-\SI{0.682}{\volt}}
+  {\SI{2.274}{\milli\volt\per\gram}}
+  \approx\SI{197.0}{\gram}.
+  \label{eq:halbbruecke-handy-masse}
+\end{equation}
+Dieser Wert liegt zwischen der Nullmessung und dem kleinsten Referenzgewicht von \SI{500}{\gram}.
+In diesem Bereich wurde kein zusätzlicher Referenzpunkt aufgenommen.
+Die Masse wird mit der linearen Ausgleichsgeraden zwischen diesen Kalibrierpunkten bestimmt.
+
 \subsection{Vergleich mit der Waage}
+Mit der bereitgestellten Vergleichswaage wurde eine Handymasse von \SI{206.1}{\gram} bestimmt.
+Der Punkt $(\SI{206.1}{\gram},\SI{1.13}{\volt})$ ist in \cref{fig:halbbruecke-kalibrierung} eingetragen.
+Die berechnete Masse liegt etwa \SI{9.1}{\gram} beziehungsweise \SI{4.4}{\percent} unter dem Vergleichswert.
+Die Kalibriergerade würde für \SI{206.1}{\gram} eine Ausgangsspannung von etwa \SI{1.151}{\volt} erwarten.
+Der Aufbau wurde zwischen den Messungen nicht verändert.
+Die Kalibrierpunkte liegen nicht exakt auf einer Geraden; die lineare Ausgleichsrechnung nähert daher die gemessene Kennlinie an.
+Die Berechnung der Handymasse verwendet diese lineare Näherung.
+Zusätzliche Referenzpunkte im Bereich der Handymasse würden eine genauere Beschreibung der Kennlinie in diesem Bereich ermöglichen.
 
 \clearpage
 \section{Temperatursensitivität der Halbbrücke}
@@ -582,7 +707,7 @@ Ein quantitativer Vergleich der CMRR ist mit den vorliegenden Beobachtungen nich
 
   \bibitem{laborskript}
   \emph{Messtechnik Labor: Skriptum}, Wintersemester 2026/2027.
-  Abschnitte 3.1--3.2, S.~29--34 (PDF-S.~33--38).
+  Abschnitte 3.1--3.3.1, S.~29--35 (PDF-S.~33--39).
 
   \bibitem{tlv170-datenblatt}
   Texas Instruments: \emph{TLVx170 36-V, Single-Supply, EMI-Hardened, Low-Power Operational Amplifiers for Cost-Sensitive Systems}.
