@@ -10,7 +10,7 @@ x_plot = double(separateUnits(x));
 y_plot = double(separateUnits(y_in_volt));
 
 figure
-plot(x_plot, y_plot, '-o'); 
+plot(x_plot, y_plot, '-o', 'Color', [0 0.447 0.741]);
 xlabel('Input Voltage U_s in V');
 ylabel('Output Voltage U_d in V');
 grid on;

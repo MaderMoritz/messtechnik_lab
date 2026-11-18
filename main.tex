@@ -61,31 +61,55 @@ Die Gerätebezeichnungen wurden aus den Fotos übernommen. Fehlende Angaben sind
   \small
   \setlength{\tabcolsep}{3pt}
   \renewcommand{\arraystretch}{1.3}
-  \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{30mm}>{\raggedright\arraybackslash}p{46mm}>{\raggedright\arraybackslash}p{29mm}Y@{}}
+  \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{34mm}>{\raggedright\arraybackslash}p{48mm}Y@{}}
     \toprule
-    Gerät / Hilfsmittel & Hersteller / Typ & Inventarnr. / Kennung & Messbereich / Bemerkung \\
+    Gerät / Hilfsmittel & Hersteller / Typ \\
     \midrule
-    Digitalmultimeter & Keysight U1232A & \platzhalter{ergänzen} & Diagonalspannung; \platzhalter{Messbereich} \\
-    Digitalmultimeter & Neumann 9140 & \platzhalter{ergänzen} & \platzhalter{Messbereiche} \\
-    Oszilloskop & Agilent InfiniiVision DSO-X 2002A & CD0408-6 & \platzhalter{Tastköpfe} \\
-    Funktionsgenerator & Siglent SDG1025 & CA0406-5 & \platzhalter{Betriebsart} \\
-    DC-Netzgerät & RS PRO RS-D3305P & \platzhalter{ergänzen} & \platzhalter{Kanäle} \\
-    Widerstandsdekade & Goerz Electro & Nr.~A~2475 & Aufdruck: 529 MB 65/32 \\
-    Kapazitätsdekade & Danbridge DK4S & \platzhalter{ergänzen} & \platzhalter{verwendeter Bereich} \\
-    Steckbrett & \platzhalter{Typ ergänzen} & CA0406-6 & Zusatzwiderstände und Verdrahtung \\
-    Potentiometer & \platzhalter{Typ ergänzen} & \platzhalter{ergänzen} & \platzhalter{Nennwert} \\
-    DMS-Wägeaufbau & Laboraufbau & \platzhalter{ergänzen} & Mit Temperatursensoren und Heizung \\
-    Messverstärker-Platine & \platzhalter{Bezeichnung} & \platzhalter{ergänzen} & Subtrahier- und Instrumentenverstärker \\
-    Weitere Geräte / Zubehör & \platzhalter{ergänzen} & \platzhalter{ergänzen} & \platzhalter{z. B. Referenzgewichte} \\
+    Digitalmultimeter & Keysight U1232A  \\
+    Digitalmultimeter & Neumann 9140 \\
+    Oszilloskop & Agilent InfiniiVision DSO-X 2002A &  \\
+    Funktionsgenerator & Siglent SDG1025 \\
+    DC-Netzgerät & RS PRO RS-D3305P \\
+    Widerstandsdekade & Goerz Electro \\
+    Kapazitätsdekade & Danbridge DK4S \\
+    Steckbrett & ubekannt \\
+    Potentiometer & unbekannt \\
+    DMS-Wägeaufbau & unbekannt \\
+    Messverstärker-Platine & unbekannt \\
+    Weitere Geräte / Zubehör & unbekannt \\
     \bottomrule
+  
   \end{tabularx}
   \endgroup
 \end{table}
 % Fotobelege: bilder/used_devices/. Die Messverstaerker-Platine ist in den
 % hier bereitgestellten Geraetefotos nicht eindeutig separat dokumentiert.
-\subsection{Kurze einführende Beschreibung (optional)}
+\clearpage
+\subsection{Kurze einführende Beschreibung}
+Diese Laborübung behandelt DC- und AC-Messbrücken sowie Subtrahier- und Instrumentenverstärker.
+Untersucht werden der Brückenabgleich sowie Verstärkung, Offset und Rauschen der Messverstärker.
+Anschließend wird eine DMS-Waage als Halb- und Vollbrücke kalibriert und ihr Temperaturverhalten betrachtet.
+Ein RC-Tiefpass dient abschließend zur Verringerung der Rauschspannung.
+
 \subsection{Bestätigung der selbst durchgeführten Messungen und der daraus gewonnenen Ergebnisse}
+Wir bestätigen, dass wir sämtliche in diesem Protokoll als Messungen angeführten Versuche selbst durchgeführt und die zugehörigen Messergebnisse selbst erhoben haben.
+Ergänzende Simulationen sind im Protokoll ausdrücklich als solche gekennzeichnet.
+
 \subsection{Unterschriften aller Teilnehmer}
+\vspace{16mm}
+\noindent
+\begin{minipage}[t]{0.30\linewidth}
+  \hrule\vspace{3mm}
+  Moritz Mader
+\end{minipage}\hfill
+\begin{minipage}[t]{0.30\linewidth}
+  \hrule\vspace{3mm}
+  Hu Andy
+\end{minipage}\hfill
+\begin{minipage}[t]{0.30\linewidth}
+  \hrule\vspace{3mm}
+  Plattner Magdalena
+\end{minipage}
 
 \clearpage
 \section{DC-Messbrücke}
@@ -96,11 +120,11 @@ Der Parallelwiderstand beschreibt die Leckströme durch das nicht ideal isoliere
 \Cref{fig:wien_bridge} zeigt eine Kapazitätsmessbrücke nach Wien mit zwei Parallel-RC-Zweigen und zwei rein ohmschen Brückenarmen.
 Dabei sind $R_1$ und $C_1$ die einstellbaren Vergleichsgrößen; $R_2$ und $C_2$ beschreiben den zu untersuchenden Kondensator.
 Für die DC-Messung wird der Vergleichskondensator $C_1$ weggelassen.
-Nach dem Einschwingen fließt durch den idealen kapazitiven Anteil von $C_2$ kein Gleichstrom; der Parallelwiderstand $R_2$ bleibt wirksam.
+Nach dem Einschwingen fließt durch den idealen kapazitiven Anteil von $C_2$ kein Gleichstrom, der Parallelwiderstand $R_2$ bleibt wirksam.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.5\textwidth]{shematics/wien_bridge.png}
+  \includegraphics[width=0.4\textwidth]{shematics/wien_bridge.png}
   \caption{Kapazitätsmessbrücke nach Wien; für die DC-Messung wird $C_1$ weggelassen.}
   \label{fig:wien_bridge}
 \end{figure}
@@ -111,10 +135,9 @@ Zum Einstellen des Widerstands $R_1$ stand eine Widerstandsdekade zur Verfügung
 \subsection{Wahl der Versorgungsspannung}
 Zur Bestimmung des Parallelwiderstands $R_2$ wurde eine Gleichspannung von $U_S = \SI{15}{\volt}$ gewählt.
 Das Laborskript sieht hierfür eine Versorgungsspannung zwischen \SI{1}{\volt} und \SI{30}{\volt} vor~\cite{laborskript}.
-Bei unveränderten linearen Widerständen bewirkt eine höhere Versorgungsspannung eine größere Diagonalspannung bei gleicher Restverstimmung.
-Dadurch lässt sich eine Abweichung vom Nullpunkt bei gleicher absoluter Spannungsauflösung leichter erkennen.
-Dem stehen eine höhere Verlustleistung und mögliche temperaturbedingte Widerstandsänderungen gegenüber.
-Die Wahl von \SI{15}{\volt} erfolgte als Kompromiss zwischen Abgleichempfindlichkeit und Bauteilbelastung; eine optimale Speisespannung wurde damit nicht nachgewiesen.
+Bei unveränderten linearen Widerständen bewirkt eine höhere Versorgungsspannung eine größere Diagonalspannung.
+Dadurch lässt sich eine Abweichung vom Nullpunkt leichter erkennen.
+Die Wahl von \SI{15}{\volt} erfolgte als Kompromiss zwischen Abgleichempfindlichkeit und Bauteilbelastung eine optimale Speisespannung wurde damit nicht nachgewiesen.
 
 \subsection{Bestimmung des Realteils der Impedanz}
 Aus den beiden Spannungsteilern der allgemeinen Vergleichsschaltung folgt für den Abgleich $U_d = 0$ die Bedingung
@@ -633,13 +656,14 @@ Deshalb unterscheidet sich ihr Achsenabschnitt $b\approx\SI{0.682}{\volt}$ von d
 Die größte Abweichung eines Kalibrierpunkts von dieser Geraden beträgt etwa \SI{0.101}{\volt}.
 Werden nur die fünf belasteten Referenzpunkte verwendet, ergeben sich dagegen $S_m=\SI{1.770}{\milli\volt\per\gram}$ und ein extrapolierter Achsenabschnitt von \SI{1.049}{\volt}.
 Die zusätzliche Nullmessung beeinflusst die Ausgleichsgerade somit deutlich.
+In \cref{fig:halbbruecke-kalibrierung} ist die Ausgleichsgerade mit Nullmessung rot durchgezogen und die Gerade allein aus den belasteten Referenzpunkten rot gestrichelt dargestellt.
 
 \begin{center}
 \begin{minipage}{\linewidth}
   \centering
   \includegraphics[width=0.8\linewidth]{gewichtsmessung/regression_gewichtsmessung.png}
   \captionsetup{hypcap=false}
-  \captionof{figure}{Kalibrierpunkte und lineare Ausgleichsgerade der Halbbrücke einschließlich der Nullmessung von \SI{610}{\milli\volt}. In blau ist die Gerade allein aus den belasteten Referenzpunkten dargestellt, in rot mit dem Nullpunkt (m = 0). Die Handymessung bei \SI{1.13}{\volt} verwendet die Masse der Vergleichswaage.}
+  \captionof{figure}{Kalibrierung der Halbbrücke. Blaue ausgefüllte Kreise zeigen die Referenzmessungen einschließlich der Nullmessung. Die rote durchgezogene Gerade berücksichtigt alle sechs Kalibrierpunkte, die rot gestrichelte Gerade nur die fünf belasteten Referenzpunkte. Bei \SI{1.13}{\volt} sind die Handymasse der Vergleichswaage von \SI{206.1}{\gram} als offener blauer Kreis und die aus der roten Kalibriergeraden berechnete DMS-Masse von etwa \SI{197.0}{\gram} als offenes blaues Quadrat eingetragen.}
   \label{fig:halbbruecke-kalibrierung}
 \end{minipage}
 \end{center}
@@ -664,36 +688,374 @@ Die Umkehrung der Kalibriergeraden einschließlich der Nullmessung liefert
   \approx\SI{197.0}{\gram}.
   \label{eq:halbbruecke-handy-masse}
 \end{equation}
+Die Handymasse wurde in MATLAB aus der gemessenen Ausgangsspannung und den beiden Koeffizienten der roten Kalibriergeraden berechnet.
+Der berechnete Punkt $(\SI{197.0}{\gram},\SI{1.13}{\volt})$ ist in \cref{fig:halbbruecke-kalibrierung} als offenes blaues Quadrat dargestellt.
+Da die Masse durch Umkehren dieser Kalibriergeraden bestimmt wurde, liegt der Punkt auf der roten Geraden.
 Dieser Wert liegt zwischen der Nullmessung und dem kleinsten Referenzgewicht von \SI{500}{\gram}.
 In diesem Bereich wurde kein zusätzlicher Referenzpunkt aufgenommen.
 Die Masse wird mit der linearen Ausgleichsgeraden zwischen diesen Kalibrierpunkten bestimmt.
 
 \subsection{Vergleich mit der Waage}
 Mit der bereitgestellten Vergleichswaage wurde eine Handymasse von \SI{206.1}{\gram} bestimmt.
-Der Punkt $(\SI{206.1}{\gram},\SI{1.13}{\volt})$ ist in \cref{fig:halbbruecke-kalibrierung} eingetragen.
+Der Punkt $(\SI{206.1}{\gram},\SI{1.13}{\volt})$ ist in \cref{fig:halbbruecke-kalibrierung} als offener blauer Kreis eingetragen.
+Er liegt auf derselben Spannungshöhe wie das blaue Quadrat der DMS-Auswertung; der horizontale Abstand zeigt die Differenz der beiden Massenwerte.
 Die berechnete Masse liegt etwa \SI{9.1}{\gram} beziehungsweise \SI{4.4}{\percent} unter dem Vergleichswert.
 Die Kalibriergerade würde für \SI{206.1}{\gram} eine Ausgangsspannung von etwa \SI{1.151}{\volt} erwarten.
 Der Aufbau wurde zwischen den Messungen nicht verändert.
-Die Kalibrierpunkte liegen nicht exakt auf einer Geraden; die lineare Ausgleichsrechnung nähert daher die gemessene Kennlinie an.
+Die Kalibrierpunkte liegen nicht exakt auf einer Geraden, die lineare Ausgleichsrechnung nähert daher die gemessene Kennlinie an.
 Die Berechnung der Handymasse verwendet diese lineare Näherung.
 Zusätzliche Referenzpunkte im Bereich der Handymasse würden eine genauere Beschreibung der Kennlinie in diesem Bereich ermöglichen.
 
 \clearpage
 \section{Temperatursensitivität der Halbbrücke}
+Die Temperaturabhängigkeit wurde nach Abschnitt 3.3.2 des Laborskripts untersucht~\cite{laborskript}.
+Die Waage blieb während des Versuchs unbelastet.
+Brückenspeisung und Gain-Widerstand wurden gegenüber der Gewichtsmessung nicht verändert: $U_B=\SI{24}{\volt}$ und $R_G=\SI{35.7}{\ohm}$.
+Der Widerstand des oberen PT1000 wurde mit einem Multimeter gemessen und daraus die Temperatur bestimmt.
+Die Verstärkerausgangsspannung und ihr AC-RMS-Wert wurden mit einem Oszilloskop gemessen.
+Der untere PT1000 wurde nicht gemessen.
+Bei einem angezeigten Widerstand von \SI{1234}{\ohm} wurde die Heizung abgeschaltet, damit der berechnete Grenzwert nicht überschritten wird.
+
+
 \subsection{Messung der RMS-Rauschspannung}
-\subsection{Plot der Verstärkung über der Temperatur}
-\subsection{Plot der Rauschspannung über der Temperatur}
+Bei Raumtemperatur wurde am Ausgang der Halbbrücken-Messkette eine RMS-Rauschspannung von \SI{2.35}{\milli\volt} gemessen.
+Dieser separate Raumtemperaturwert ist in \cref{tab:temperatur-hb-messwerte} angegeben; im Diagramm der Temperaturreihe wird er nicht dargestellt.
+Für die Temperaturreihe wurden am Oszilloskop der Mittelwert und der AC-RMS-Wert der Ausgangsspannung gemessen.
+Der Mittelwert beschreibt die Ausgangsgleichspannung; AC-RMS erfasst die zeitlichen Schwankungen um den Mittelwert.
+
+\subsection{Temperaturabhängigkeit der Ausgangsspannung}
+Nach dem linearen PT1000-Modell des Laborskripts gilt
+\begin{equation}
+  \addxcontentsline{loe}{equation}[\theequation]{PT1000-Modell zur Temperaturbestimmung}
+  R(T)=R_0(1+\alpha T),\qquad
+  R_0=\SI{1000}{\ohm},\quad
+  \alpha=\SI{0.003910}{\per\kelvin}.
+  \label{eq:temperatur-pt1000-modell}
+\end{equation}
+$T$ bezeichnet hierbei die Temperaturdifferenz gegenüber \SI{0}{\celsius}; ihr Zahlenwert in Kelvin entspricht der Temperaturangabe in Grad Celsius.
+Die Temperatur wurde in MATLAB über
+\begin{equation}
+  \addxcontentsline{loe}{equation}[\theequation]{Temperatur aus dem gemessenen PT1000-Widerstand}
+  T=\frac{R/R_0-1}{\alpha}
+  \label{eq:temperatur-pt1000-umrechnung}
+\end{equation}
+berechnet.
+Der bei Raumtemperatur gemessene Widerstand von \SI{1.106}{\kilo\ohm} entspricht damit etwa \SI{27.11}{\celsius}.
+Für die vorgesehene Maximaltemperatur von \SI{60}{\celsius} wurde ein Widerstand von \SI{1234.6}{\ohm} berechnet.
+Am Abschaltpunkt wurden mit dem Multimeter \SI{1234}{\ohm} gemessen, entsprechend etwa \SI{59.85}{\celsius}.
+
+Die mit dem Oszilloskop gemessenen Ausgangsmittelwerte und AC-RMS-Werte wurden jeweils dem gleichzeitig mit dem Multimeter gemessenen PT1000-Widerstand zugeordnet.
+Alle numerischen Umrechnungen und die grafische Darstellung wurden in MATLAB durchgeführt.
+Die Messwerte der Halbbrücke sind in \cref{tab:temperatur-hb-messwerte} zusammengefasst.
+Die Temperaturen wurden aus den Widerstandswerten berechnet.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+  \centering
+  \captionsetup{hypcap=false}
+  \captionof{table}{Messwerte der unbelasteten Halbbrücke. Der PT1000-Widerstand wurde mit einem Multimeter, Ausgangsmittelwert und AC-RMS wurden mit einem Oszilloskop gemessen. Für den separaten Raumtemperaturpunkt liegt kein Ausgangsmittelwert vor.}
+  \label{tab:temperatur-hb-messwerte}
+  \small
+  \begin{tabular}{rrrrl}
+    \toprule
+    $R$ / \si{\ohm} & $T$ / \si{\celsius} & $\overline{U}_a$ / \si{\milli\volt} & AC-RMS / \si{\milli\volt} & Zustand \\
+    \midrule
+    1106 & 27,11 & --    & 2,35 & Raumtemperatur \\
+    1118 & 30,18 & 627,1 & 3,8  & Heizung ein \\
+    1130 & 33,25 & 666,8 & 3,3  & Heizung ein \\
+    1140 & 35,81 & 623,6 & 3,4  & Heizung ein \\
+    1150 & 38,36 & 626,3 & 3,5  & Heizung ein \\
+    1160 & 40,92 & 616,9 & 3,6  & Heizung ein \\
+    1170 & 43,48 & 578,3 & 3,9  & Heizung ein \\
+    1180 & 46,04 & 512,4 & 3,8  & Heizung ein \\
+    1190 & 48,59 & 473,2 & 3,8  & Heizung ein \\
+    1200 & 51,15 & 446,9 & 3,7  & Heizung ein \\
+    1210 & 53,71 & 422,4 & 3,7  & Heizung ein \\
+    1220 & 56,27 & 405,1 & 3,8  & Heizung ein \\
+    1229 & 58,57 & 388,2 & 3,7  & Heizung ein \\
+    1234 & 59,85 & 273,2 & 1,6  & Heizung abgeschaltet \\
+    \bottomrule
+  \end{tabular}
+\end{minipage}
+\end{center}
+
+\Cref{fig:temperatur-hb-ausgang} zeigt die Ausgangsspannung über der Temperatur des oberen PT1000.
+Die Ausgangsspannung fällt beim Erwärmen insgesamt ab.
+Am Abschaltpunkt mit \SI{1234}{\ohm} betrug der Ausgangsmittelwert \SI{273.2}{\milli\volt}.
+Dieser Punkt wird wie die übrigen Messwerte als blauer Kreis dargestellt; die Heizung war bei dieser Messung bereits ausgeschaltet.
+
+Zur quantitativen Beschreibung wurde in MATLAB eine lineare Ausgleichsgerade nach der Methode der kleinsten Quadrate berechnet und dargestellt.
+Der Abschaltpunkt wurde wegen des geänderten Heizungszustands nicht in diese Regression einbezogen.
+Als lineare Näherung im Bereich von \SI{30.18}{\celsius} bis \SI{58.57}{\celsius} ergibt sich
+
+\begin{equation}
+  \addxcontentsline{loe}{equation}[\theequation]{Lineare Temperaturabhängigkeit der Halbbrücken-Ausgangsspannung}
+ \widehat{U}_{a,\mathrm{HB}}(T)
+  =-\SI{10.57195}{\milli\volt\per\kelvin}\,T + \SI{1004.75997}{\milli\volt},
+  \qquad S_T\approx\SI{-10.572}{\milli\volt\per\kelvin}.
+  \label{eq:temperatur-hb-fit}
+\end{equation}
+
+Die Geradenkoeffizienten entsprechen unmittelbar der in MATLAB berechneten Steigung und dem Achsenabschnitt.
+Die Sensitivität beträgt somit $\mathrm{d}\widehat{U}_{a,\mathrm{HB}}/\mathrm{d}T=\SI{-10.572}{\milli\volt\per\kelvin}$.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+  \centering
+  \includegraphics[width=0.85\linewidth]{temperaturmessung/halbbruecke_ua_temperatur.pdf}
+  \captionsetup{hypcap=false}
+  \captionof{figure}{Ausgangsmittelwert der unbelasteten Halbbrücke über der aus dem oberen PT1000 berechneten Temperatur. Alle Messwerte sind als blaue Kreise dargestellt. Die gestrichelte rote Gerade zeigt die lineare Regression der zwölf Heizpunkte; der ebenfalls blau dargestellte Abschaltpunkt bei \SI{1234}{\ohm} geht nicht in die Regression ein.}
+  \label{fig:temperatur-hb-ausgang}
+\end{minipage}
+\end{center}
+
+
+\subsection{Rauschspannung über der Temperatur}
+Bei eingeschalteter Heizung lagen die gemessenen AC-RMS-Werte zwischen \SI{3.3}{\milli\volt} und \SI{3.9}{\milli\volt}.
+Ein streng monotoner Anstieg mit der Temperatur ist nicht erkennbar.
+Am Abschaltpunkt wurden \SI{1.6}{\milli\volt} gemessen, siehe \cref{fig:temperatur-hb-rauschen}.
+Die lineare Ausgleichsgerade wurde in MATLAB über die zwölf Messpunkte bei eingeschalteter Heizung berechnet.
+Der Abschaltpunkt bei \SI{1234}{\ohm} bleibt als normaler blauer Messpunkt sichtbar, wird wegen des geänderten Heizungszustands jedoch nicht in die Regression einbezogen.
+Der separate Raumtemperaturwert wird weder eingezeichnet noch für diese Regression verwendet.
+Es ergibt sich
+\begin{equation}
+  \addxcontentsline{loe}{equation}[\theequation]{Lineare Näherung der Halbbrücken-Rauschspannung über der Temperatur}
+  \widehat{U}_{n,\mathrm{HB}}(T)
+  =\SI{0.0094127}{\milli\volt\per\kelvin}\,T
+  +\SI{3.24598}{\milli\volt}.
+  \label{eq:temperatur-hb-rauschfit}
+\end{equation}
+Die Gerade beschreibt den mittleren Trend der Heizpunkte; die gemessenen Werte streuen um diese Näherung.
+
+
+\begin{center}
+\begin{minipage}{\linewidth}
+  \centering
+  \includegraphics[width=0.85\linewidth]{temperaturmessung/halbbruecke_rauschen_temperatur.pdf}
+  \captionsetup{hypcap=false}
+  \captionof{figure}{AC-RMS am Ausgang der Halbbrücke über der Temperatur. Blaue Kreise zeigen die Messwerte, die gestrichelte rote Gerade die lineare Regression der zwölf Heizpunkte. Der Abschaltpunkt bei \SI{1234}{\ohm} ist ebenfalls ein blauer Kreis, wurde aber nicht für die Regression verwendet. Der separate Raumtemperaturwert ist nicht eingezeichnet.}
+  \label{fig:temperatur-hb-rauschen}
+\end{minipage}
+\end{center}
+
 
 \clearpage
 \section{Vollbrücke}
 \subsection{Sensitivitätsmessung und Vergleich mit der Halbbrücke}
+Nach dem Abschalten der Heizung wurde die Halbbrücke zur Vollbrücke erweitert.
+Die Sensitivität der Vollbrücke wurde nach Abschnitt 3.3.3 des Laborskripts mit den bereitgestellten Referenzgewichten bestimmt~\cite{laborskript}.
+Der Balken war dabei nach dem Heizversuch noch nicht auf Raumtemperatur abgekühlt.
+Die Temperatur während dieser Lastmessung ist nicht bekannt.
+Die Messreihe beschreibt daher die Kalibrierung bei unbekannter erhöhter Temperatur.
+Die mit dem Oszilloskop gemessenen Ausgangsspannungen sind in \cref{tab:vollbruecke-kalibrierung} angegeben.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+  \centering
+  \captionsetup{hypcap=false}
+  \captionof{table}{Referenzmassen und Ausgangsspannungen der Vollbrücke. Der Balken war noch erwärmt; die Temperatur wurde während dieser Messreihe nicht bestimmt.}
+  \label{tab:vollbruecke-kalibrierung}
+  \begin{tabular}{rr}
+    \toprule
+    $m$ / \si{\gram} & $U_a$ / \si{\volt} \\
+    \midrule
+    400 & 2,17 \\
+    500 & 2,57 \\
+    600 & 3,01 \\
+    700 & 3,42 \\
+    800 & 3,84 \\
+    900 & 4,18 \\
+    \bottomrule
+  \end{tabular}
+\end{minipage}
+\end{center}
+
+Die lineare Regression über alle sechs Messwerte wurde in MATLAB berechnet.
+Für die Ausgleichsgerade ergibt sich
+\begin{equation}
+  \addxcontentsline{loe}{equation}[\theequation]{Kalibriergerade der erwärmten Vollbrücke}
+  \widehat{U}_{a,\mathrm{VB}}(m)
+  =\SI{4.07714}{\milli\volt\per\gram}\,m+\SI{0.54819}{\volt},
+  \qquad S_\mathrm{VB}\approx\SI{4.07714}{\milli\volt\per\gram}.
+  \label{eq:vollbruecke-kalibrierung}
+\end{equation}
+
+Die Masse $m$ wird in Gramm eingesetzt.
+Die experimentell bestimmte Sensitivität beträgt somit $S_\mathrm{VB}=\SI{4.07714}{\milli\volt\per\gram}$.
+Die Gerade wird in \cref{fig:vollbruecke-kalibrierung} nur im gemessenen Bereich von \SI{400}{\gram} bis \SI{900}{\gram} dargestellt.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+  \centering
+  \includegraphics[width=0.85\linewidth]{vollbruecke/kalibrierung_vollbruecke.pdf}
+  \captionsetup{hypcap=false}
+  \captionof{figure}{Kalibrierung der Vollbrücke bei unbekannter erhöhter Balkentemperatur. Blaue Kreise zeigen die sechs Messpunkte; die rote Gerade ist die in MATLAB berechnete lineare Regression. Für diese Auswertung liegt keine Nullmessung vor.}
+  \label{fig:vollbruecke-kalibrierung}
+\end{minipage}
+\end{center}
+
+Für die zuvor ausgewertete Halbbrückenreihe einschließlich Nullmessung wurde $S_\mathrm{HB}=\SI{2.27377}{\milli\volt\per\gram}$ bestimmt.
+Das Verhältnis der beiden Sensitivitäten beträgt damit etwa $S_\mathrm{VB}/S_\mathrm{HB}=1{,}79$.
+Die zugrunde liegenden Lastbereiche unterscheiden sich: \SIrange{0}{900}{\gram} bei der Halbbrücke und \SIrange{400}{900}{\gram} bei der Vollbrücke.
+Für einen zusätzlichen Vergleich wurden deshalb in MATLAB beide Reihen auf die fünf gemeinsamen Referenzmassen von \SI{500}{\gram} bis \SI{900}{\gram} beschränkt und erneut linear ausgewertet.
+Dabei ergeben sich \SI{1.770}{\milli\volt\per\gram} für die Halbbrücke und \SI{4.050}{\milli\volt\per\gram} für die Vollbrücke, entsprechend einem Verhältnis von etwa $2{,}29$.
+
+Die Vollbrücke besitzt bei gleicher Speisung und Verstärkung gegenüber der entsprechenden Halbbrücke etwa die doppelte Sensitivität.
+Der gemeinsame Lastbereich verbessert die Vergleichbarkeit der Auswertung, beseitigt aber die unterschiedlichen Temperaturbedingungen der Messungen nicht.
+Da die Vollbrücke noch erwärmt war und auch eine mögliche Temperaturänderung während der Lastreihe nicht erfasst wurde, lässt sich die Abweichung vom idealen Faktor zwei nicht allein der Brückenschaltung zuordnen.
+
 \subsection{Temperaturabhängigkeit}
-\subsection{Plot der Rauschspannung über der Temperatur}
+Die Waage war während der Temperaturmessung unbelastet und kühlte ab.
+Speisung, Gain-Widerstand und oberer PT1000 wurden unverändert weiterverwendet.
+Auch bei der Vollbrücke wurde der PT1000-Widerstand mit einem Multimeter und die Ausgangsspannung mit einem Oszilloskop gemessen.
+Die Ausgangsmittelwerte lagen im gemessenen Temperaturbereich von etwa \SI{38.62}{\celsius} bis \SI{56.27}{\celsius} zwischen \SI{280.8}{\milli\volt} und \SI{321.9}{\milli\volt}, siehe \cref{fig:temperatur-vb-ausgang}.
+Die Messwerte der Vollbrücke sind in \cref{tab:temperatur-vb-messwerte} zusammengefasst. Die Messdaten stammen aus dem Abkühlvorgang der Waage.
+Die Heizung war während dieser Messreihe ausgeschaltet, da sich aus zeitlichen Gründen das Abwarten des Abkühlvorganges nicht realisieren ließ.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+  \centering
+  \captionsetup{hypcap=false}
+  \captionof{table}{Messwerte der unbelasteten Vollbrücke beim Abkühlen. Der Widerstand des oberen PT1000 wurde mit einem Multimeter, Ausgangsmittelwert und AC-RMS wurden mit einem Oszilloskop gemessen. Die Temperatur wurde aus dem Widerstand berechnet.}
+  \label{tab:temperatur-vb-messwerte}
+  \small
+  \begin{tabular}{rrrr}
+    \toprule
+    $R$ / \si{\ohm} & $T$ / \si{\celsius} & $\overline{U}_a$ / \si{\milli\volt} & AC-RMS / \si{\milli\volt} \\
+    \midrule
+    1220 & 56,27 & 280,8 & 1,7 \\
+    1207 & 52,94 & 296,6 & 1,7 \\
+    1200 & 51,15 & 307,0 & 2,1 \\
+    1190 & 48,59 & 308,5 & 2,3 \\
+    1180 & 46,04 & 321,4 & 2,3 \\
+    1170 & 43,48 & 321,9 & 2,0 \\
+    1151 & 38,62 & 304,0 & 3,6 \\
+    \bottomrule
+  \end{tabular}
+\end{minipage}
+\end{center}
+
+Die lineare Regression wurde in MATLAB über die sieben in der Tabelle angegebenen Messpunkte berechnet.
+Im gemessenen Temperaturbereich ergibt sich
+\begin{equation}
+  \addxcontentsline{loe}{equation}[\theequation]{Lineare Temperaturabhängigkeit der Vollbrücken-Ausgangsspannung}
+  \widehat{U}_{a,\mathrm{VB}}(T)
+  =-\SI{1.54868}{\milli\volt\per\kelvin}\,T
+  +\SI{380.31957}{\milli\volt}.
+  \label{eq:temperatur-vb-fit}
+\end{equation}
+Die Sensitivität beträgt damit $\mathrm{d}\widehat{U}_{a,\mathrm{VB}}/\mathrm{d}T=\SI{-1.549}{\milli\volt\per\kelvin}$.
+Die Gerade beschreibt die Messwerte nur näherungsweise.
+Die kleinere betragsmäßige Steigung gilt für diese Kühlreihe und ist wegen der unterschiedlichen Versuchsbedingungen kein Nachweis einer Verbesserung allein durch die Vollbrücke.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+  \centering
+  \includegraphics[width=0.85\linewidth]{temperaturmessung/vollbruecke_ua_temperatur.pdf}
+  \captionsetup{hypcap=false}
+  \captionof{figure}{Ausgangsmittelwert der unbelasteten Vollbrücke beim Abkühlen über der Temperatur des oberen PT1000. Die gestrichelte rote Gerade zeigt die lineare Regression über die sieben dargestellten Messpunkte.}
+  \label{fig:temperatur-vb-ausgang}
+\end{minipage}
+\end{center}
+
+\clearpage
+\subsection{Rauschspannung über der Temperatur}
+Die meisten AC-RMS-Werte der Vollbrückenreihe lagen zwischen \SI{1.7}{\milli\volt} und \SI{2.3}{\milli\volt}.
+Beim Messpunkt mit \SI{1151}{\ohm}, entsprechend etwa \SI{38.62}{\celsius}, wurden \SI{3.6}{\milli\volt} gemessen; dabei trat ein kurzer Signalausschlag auf.
+Dieser Ausreißer wird wie die übrigen Messwerte als normales blaues Quadrat dargestellt, für die lineare Regression jedoch nicht verwendet.
+Die in MATLAB berechnete Regression über die übrigen sechs Punkte ergibt
+\begin{equation}
+  \addxcontentsline{loe}{equation}[\theequation]{Lineare Näherung der Vollbrücken-Rauschspannung über der Temperatur}
+  \widehat{U}_{n,\mathrm{VB}}(T)
+  =-\SI{0.0388069}{\milli\volt\per\kelvin}\,T
+  +\SI{3.94709}{\milli\volt}.
+  \label{eq:temperatur-vb-rauschfit}
+\end{equation}
+Die Gerade beschreibt den mittleren Verlauf im Fitbereich von etwa \SI{43.48}{\celsius} bis \SI{56.27}{\celsius}.
+
+
+\begin{center}
+\begin{minipage}{\linewidth}
+  \centering
+  \includegraphics[width=0.85\linewidth]{temperaturmessung/vollbruecke_rauschen_temperatur.pdf}
+  \captionsetup{hypcap=false}
+  \captionof{figure}{AC-RMS am Ausgang der Vollbrücke beim Abkühlen. Alle Messwerte sind als blaue Quadrate dargestellt. Die gestrichelte rote Gerade zeigt die lineare Regression ohne den Messpunkt bei \SI{1151}{\ohm}; dieser bleibt ohne besondere Markierung im Diagramm sichtbar.}
+  \label{fig:temperatur-vb-rauschen}
+\end{minipage}
+\end{center}
+
+Die Messwerte werden über der aus dem PT1000-Widerstand berechneten Temperatur dargestellt.
 
 \clearpage
 \section{Tiefpassfilter zur Rauschunterdrückung}
 \subsection{Messung der gefilterten Rauschspannung}
+Der Filtervergleich nach Abschnitt 3.3.4 des Laborskripts wurde durchgeführt, bevor der Balken wieder Raumtemperatur erreicht hatte~\cite{laborskript}.
+Mit dem Multimeter wurde am PT1000 ein Widerstand von \SI{1138}{\ohm} gemessen.
+Mit \cref{eq:temperatur-pt1000-umrechnung} folgt daraus
+\begin{equation}
+  \addxcontentsline{loe}{equation}[\theequation]{Balkentemperatur beim Filtervergleich}
+  T=\SI{0}{\celsius}+\frac{1138/1000-1}{\SI{0.003910}{\per\kelvin}}
+  \approx\SI{35.29}{\celsius}.
+  \label{eq:filter-messtemperatur}
+\end{equation}
+Abweichend von der im Skript vorgesehenen Messung bei Umgebungstemperatur beziehen sich die folgenden Werte somit auf den noch erwärmten Balken.
+Die RMS-Rauschspannung wurde mit dem Oszilloskop am ungefilterten und am gefilterten Ausgang gemessen, siehe \cref{tab:filter-rauschmessung}.
+
+\begin{center}
+\begin{minipage}{\linewidth}
+  \centering
+  \captionsetup{hypcap=false}
+  \captionof{table}{Vergleich der gemessenen RMS-Rauschspannungen bei einem PT1000-Widerstand von \SI{1138}{\ohm}, entsprechend etwa \SI{35.29}{\celsius}.}
+  \label{tab:filter-rauschmessung}
+  \begin{tabular}{lr}
+    \toprule
+    Ausgang & $U_\mathrm{rms}$ / \si{\milli\volt} \\
+    \midrule
+    Ungefiltert & 2,700 \\
+    Gefiltert   & 0,150 \\
+    \bottomrule
+  \end{tabular}
+\end{minipage}
+\end{center}
+
+Die gefilterte Rauschspannung von \SI{150}{\micro\volt} entspricht einem Achtzehntel des ungefilterten Werts.
+Die relative Verringerung beträgt
+\begin{equation}
+  \addxcontentsline{loe}{equation}[\theequation]{Relative Verringerung der gemessenen RMS-Rauschspannung}
+  \left(1-\frac{U_{\mathrm{rms,gef}}}{U_{\mathrm{rms,ungef}}}\right)\cdot100\,\%
+  =\left(1-\frac{0{,}150}{2{,}700}\right)\cdot100\,\%
+  \approx94{,}44\,\%.
+  \label{eq:filter-rauschreduktion}
+\end{equation}
+Als Wert für die Reduktion in Dezibel ergibt sich
+\begin{equation}
+  \addxcontentsline{loe}{equation}[\theequation]{RMS-Rauschreduktion in Dezibel}
+  D_\mathrm{RMS}
+  =20\log_{10}\!\left(\frac{U_{\mathrm{rms,ungef}}}{U_{\mathrm{rms,gef}}}\right)
+  =20\log_{10}(18)\approx\SI{25.11}{\decibel}.
+  \label{eq:filter-rauschreduktion-db}
+\end{equation}
+Temperaturumrechnung und numerischer Vergleich wurden ebenfalls in MATLAB berechnet.
+
+
 \subsection{Erklärung der Rauschquellen}
+Für den Tiefpass wurden $R_F=\SI{22}{\kilo\ohm}$ und $C_F=\SI{1}{\micro\farad}$ verwendet.
+Damit ergibt sich im ideal unbelasteten Modell
+\begin{equation}
+  \addxcontentsline{loe}{equation}[\theequation]{Übertragungsfunktion und Grenzfrequenz des RC-Tiefpasses}
+  H(j\omega)=\frac{1}{1+j\omega R_FC_F},\qquad
+  f_g=\frac{1}{2\pi R_FC_F}\approx\SI{7.234}{\hertz}.
+  \label{eq:filter-uebertragung}
+\end{equation}
+Höherfrequente Spannungsanteile werden stärker gedämpft als langsame Änderungen der Gewichtsanzeige.
+Die Zeitkonstante beträgt $\tau=R_FC_F=\SI{0.022}{\second}$.
+Nach einem idealen Eingangssprung benötigt allein das RC-Glied damit etwa \SI{0.101}{\second}, bis die Abweichung vom Endwert auf ein Prozent abgefallen ist.
+Ein konstanter Gleichspannungsanteil wird im eingeschwungenen idealen Modell unverändert übertragen.
+Eine temperaturbedingte Nullpunktverschiebung wird deshalb durch den Tiefpass nicht grundsätzlich beseitigt.
+
+Zum Ausgangsrauschen tragen die Widerstände der Schaltung sowie das Spannungs- und Stromrauschen des Verstärkers bei.
+Der Tiefpass begrenzt die übertragene Rauschbandbreite.
+
 
 \clearpage
 % Weitere Quellen als \bibitem{schluessel} ergänzen und mit \cite{schluessel} zitieren.
@@ -707,7 +1069,7 @@ Zusätzliche Referenzpunkte im Bereich der Handymasse würden eine genauere Besc
 
   \bibitem{laborskript}
   \emph{Messtechnik Labor: Skriptum}, Wintersemester 2026/2027.
-  Abschnitte 3.1--3.3.1, S.~29--35 (PDF-S.~33--39).
+  Abschnitte 3.1--3.3.4, S.~29--37 (PDF-S.~33--41).
 
   \bibitem{tlv170-datenblatt}
   Texas Instruments: \emph{TLVx170 36-V, Single-Supply, EMI-Hardened, Low-Power Operational Amplifiers for Cost-Sensitive Systems}.

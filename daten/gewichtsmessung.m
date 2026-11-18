@@ -1,6 +1,8 @@
 % Messdaten
 m_g = [0; 500; 600; 700; 800; 900]; % Masse
 Ua_V = [0.610; 1.92; 2.13; 2.29; 2.46; 2.64];   % Outputspannung
+blau = [0 0.447 0.741];
+rot = [0.85 0.10 0.10];
 
 % Messung mit Vergleichswaage
 Ua_handy_V = 1.13;
@@ -19,24 +21,31 @@ p_nozero = polyfit(m_g(idx), Ua_V(idx), 1);
 m_fit_nozero = linspace(0, max(m_g(idx)), 100);
 Ua_nozero = polyval(p_nozero, m_fit_nozero);
 
+% Gewicht Handy berechnen
+m_handy_berechnet = (Ua_handy_V - p(2)) / p(1);
+
+
 figure
 % Plot ohne Nullmessung
-plot(m_fit_nozero, Ua_nozero, 'b--', ...
+plot(m_fit_nozero, Ua_nozero, '--', 'Color', rot, ...
     'LineWidth', 1.5, 'HandleVisibility', 'off')
 hold on
 % Plot mit Messpunkten
-plot(m_g, Ua_V, 'ko', 'MarkerFaceColor', 'k')
+plot(m_g, Ua_V, 'o', 'Color', blau, 'MarkerFaceColor', blau)
 hold on
 % Plot mit Nullmessung
-plot(m_fit, Ua_fit, 'r-', 'LineWidth', 1.5)
+plot(m_fit, Ua_fit, '-', 'Color', rot, 'LineWidth', 1.5)
 hold on
 % Handy-Messung
-plot(m_handy_waage_g, Ua_handy_V, 'og', LineWidth=2)
+plot(m_handy_waage_g, Ua_handy_V, 'o', 'Color', blau, LineWidth=2)
+hold on
+plot(m_handy_berechnet, Ua_handy_V, 's', 'Color', blau, LineWidth=2 );
 hold off
 grid on
 xlabel('m_g')
 ylabel('U_a [V]')
 legend('Messwerte', sprintf('Regression: U_a = %.4g m_g + %.4g', p(1), p(2)), ...
-    'Handy DMS','Location', 'best')
+    'Handy Vergleichswaage','Handy DMS', 'Location', 'best')
 
 fprintf('Regressionsgerade: U_a = %.6g * m_g + %.6g\n', p(1), p(2));
+fprintf('Gewicht laut DMS: m = %d',m_handy_berechnet);
