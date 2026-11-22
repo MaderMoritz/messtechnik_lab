@@ -1,0 +1,170 @@
+% !TeX root = ../main.tex
+% Eigene Vektorzeichnungen der im Protokoll beschriebenen Messaufbauten.
+\colorlet{LabAkzent}{blue!47!black}
+\tikzset{
+  lab beschriftung/.style={font=\footnotesize\sffamily, text=LabAkzent},
+  lab geraet/.style={draw, rounded corners=2pt, align=center, inner sep=3pt,
+    font=\footnotesize\sffamily, fill=white},
+}
+
+\newcommand{\LabSchaltbild}[4]{%
+  \begin{center}
+  \begin{minipage}{\linewidth}
+    \centering
+    #3\par
+    \captionsetup{hypcap=false}
+    \captionof{figure}[#1]{#4}
+    \label{#2}
+  \end{minipage}
+  \end{center}%
+}
+
+% Die Armbezeichnungen entsprechen den Gleichungen des eigenen Protokolls.
+\newcommand{\LabVergleichsbruecke}[1]{%
+  \begin{circuitikz}[european resistors, font=\small]
+    \ctikzset{bipoles/length=1.05cm}
+    \draw (0.75,0) -- (7.65,0) -- (7.65,0.38);
+    \draw (0.75,5.13) -- (7.65,5.13) -- (7.65,4.71);
+    \draw (3.45,5.13) node[circ]{} to[R,l_={$R_3=\SI{100.1}{\kilo\ohm}$}] (3.45,2.51)
+      node[circ]{} to[R,l_={$R_4=\SI{470}{\kilo\ohm}$}] (3.45,0) node[circ]{};
+    \draw (7.65,4.71) node[circ]{} to[R] (7.65,3.77)
+      to[vR] (7.65,2.74) node[circ]{} -- (7.65,2.29) node[circ]{}
+      to[R] (7.65,0.38) node[circ]{};
+    \node[right] at (7.85,4.24) {$R_{\mathrm{Serie}}$};
+    \node[right] at (7.85,3.18) {$R_1$ (Dekade)};
+    \node[right] at (7.85,1.34) {$R_2$};
+    \draw (7.65,2.29) -- (10.9,2.29) to[C] (10.9,0.38) -- (7.65,0.38);
+    \node[right] at (11.34,1.34) {$C_2$};
+    \ifnum#1=0
+      \draw (0.75,5.13) to[battery1] (0.75,0);
+      \node[right] at (1.06,2.83) {$U_S=\SI{15}{\volt}$};
+      \node[lab geraet] (mess) at (5.47,2.51) {Multimeter};
+    \else
+      \draw (0.75,5.13) to[sV] (0.75,0);
+      \node[align=left,right,font=\footnotesize] at (1.21,2.79) {$U_{S,\mathrm{pp}}=\SI{4}{\volt}$\\[-1pt]$f=\SI{1}{\kilo\hertz}$};
+      \draw (7.65,4.71) -- (10.9,4.71) to[vC] (10.9,2.74) -- (7.65,2.74);
+      \node[right] at (11.34,3.68) {$C_1$};
+      \node[lab geraet] (mess) at (5.47,2.51) {Oszilloskop};
+    \fi
+    \draw (3.45,2.51) -- (mess.west);
+    \draw (mess.east) -- (7.65,2.51) node[circ]{};
+    \node[above=2pt] at (mess.north) {$U_d$};
+  \end{circuitikz}%
+}
+
+% Eingänge: Differenzsignal (0), gemeinsamer Masseanschluss (1), gemeinsamer Pegel (2).
+\newcommand{\LabPruefeingang}[2]{%
+  \ifcase#1
+    \draw (2.6,2.55) -- (1.43,2.55) node[ocirc]{};
+    \draw (2.6,1.25) -- (1.43,1.25) node[ocirc]{};
+    \node[left,align=right] at (1.23,1.9) {$U_d(t)$#2};
+  \or
+    \draw (2.6,2.55) -- (1.55,2.55) -- (1.55,1.25)
+      node[circ]{} -- (2.6,1.25);
+    \draw (1.55,1.25) -- (1.55,0.66) node[ground]{};
+  \or
+    \draw (2.6,2.55) -- (1.55,2.55) -- (1.55,1.25)
+      node[circ]{} -- (2.6,1.25);
+    \draw (1.55,1.25) to[battery1] (1.55,-0.1) node[ground]{};
+    \node[left] at (1.24,0.57) {$U_{\mathrm{cm}}$};
+  \fi
+}
+
+\newcommand{\LabPruefausgang}[1]{%
+  \node[lab geraet] (osz) at (11.92,0.98) {Oszilloskop};
+  \draw (10.22,1.9) node[ocirc,label=above:OUT]{} -- (11.92,1.9) -- (osz.north);
+  \draw (osz.south) -- (11.92,0.17) node[ground]{};
+  \ifnum#1=0
+    \node[lab beschriftung] at (11.94,2.67) {$U_a(t)$};
+  \fi
+}
+
+\newcommand{\LabSubtrahierverstaerker}[1]{%
+  \begin{circuitikz}[european resistors, font=\small]
+    \LabPruefeingang{#1}{}
+    \draw (7.02,0.92) -- (7.02,2.88) -- (8.82,1.9) -- cycle;
+    \node[right] at (7.04,2.55) {$-$};
+    \node[right] at (7.04,1.25) {$+$};
+    \draw (2.6,2.55) to[R,l=$R_1$] (5.93,2.55) node[circ]{} -- (7.02,2.55);
+    \draw (2.6,1.25) to[R,l_=$R_3$] (5.93,1.25) node[circ]{} -- (7.02,1.25);
+    \draw (5.93,1.25) to[R,l_=$R_4$] (5.93,-0.34) node[ground]{};
+    \draw (5.93,2.55) -- (5.93,3.63) to[R,l=$R_2$] (9.42,3.63)
+      -- (9.42,1.9) node[circ]{};
+    \draw (8.82,1.9) -- (10.22,1.9);
+    \ifnum#1=0
+      \node[anchor=north west,font=\footnotesize] at (7.04,0.8) {$\pm\SI{12}{\volt}$};
+    \else
+      \node[lab beschriftung,anchor=north west] at (7.04,0.8) {TLV170, $\pm\SI{12}{\volt}$};
+    \fi
+    \LabPruefausgang{#1}
+  \end{circuitikz}%
+}
+
+\newcommand{\LabInstrumentenverstaerker}[1]{%
+  \begin{circuitikz}[european resistors, font=\small]
+    \LabPruefeingang{#1}{\\[-1pt]\scriptsize Generator}
+    \draw (5.28,0.79) rectangle (9.49,3.23);
+    \node at (7.31,1.97) {\sffamily LT1167};
+    \draw (2.6,2.55) to[R,l=$R_{10}$] (5.28,2.55) node[right] {$-$\,2};
+    \draw (2.6,1.25) to[R,l_=$R_9$] (5.28,1.25) node[right] {$+$\,3};
+    \draw (9.49,1.9) node[left] {6} -- (10.22,1.9);
+    \draw (9.49,1.25) node[left,font=\scriptsize] {REF\,5}
+      -- (9.81,1.25) -- (9.81,0.5) node[ground]{};
+    \draw (6.17,0.79) node[above,font=\scriptsize] {1} -- (6.17,-0.1)
+      to[R,l_={$R_G=\SI{35.7}{\ohm}$}] (8.59,-0.1) -- (8.59,0.79)
+      node[above,font=\scriptsize] {8};
+    \draw (6.17,3.23) -- (6.17,3.52) node[above] {$+12\,\mathrm{V}$};
+    \draw (8.59,3.23) -- (8.59,3.52) node[above] {$-12\,\mathrm{V}$};
+    \LabPruefausgang{#1}
+  \end{circuitikz}%
+}
+
+% Die zwei DMS-Zweige sind als horizontale Pfade gezeichnet.
+\newcommand{\LabDMSBruecke}[1]{%
+  \begin{circuitikz}[european resistors, font=\small]
+    \draw (0.73,3.33) node[ocirc,label=above:{1 $\, (+\SI{12}{\volt})$}]{}
+      -- (0.73,0.76);
+    \draw (6.16,3.33) node[ocirc,label=above:{2 $\, (-\SI{12}{\volt})$}]{}
+      -- (6.16,0.76);
+    \draw (0.73,2.47) node[circ]{} to[R,l_=$R_0+\Delta R$] (3.44,2.47)
+      node[circ]{} to[R,l_=$R_0-\Delta R$] (6.16,2.47) node[circ]{};
+    \draw (3.44,2.47) -- (3.44,4.11) node[ocirc,label=above:3]{}
+      -- (8.43,4.11) -- (8.43,2.55) -- (9.23,2.55) node[right] {$-$\,2};
+    \ifnum#1=0
+      \draw (0.73,0.76) to[R,l^=$\SI{1.04}{\kilo\ohm}$] (3.44,0.76)
+        node[circ]{} to[R,l^=$\SI{1.04}{\kilo\ohm}$] (6.16,0.76);
+      \draw[<-] (3.44,0.73) -- (3.44,-0.95);
+    \else
+      \draw (0.73,0.76) to[R,l_=$R_0-\Delta R$] (3.44,0.76)
+        node[circ]{} to[R,l_=$R_0+\Delta R$] (6.16,0.76);
+      \draw (3.44,0.76) -- (3.44,-0.64) node[ocirc,label=left:4]{}
+        -- (3.44,-0.95);
+    \fi
+    \draw (3.44,-0.95) -- (8.43,-0.95) -- (8.43,1.25)
+      -- (9.23,1.25) node[right] {$+$\,3};
+    \draw (9.23,0.79) rectangle (11.95,3.05);
+    \node at (10.59,1.9) {\sffamily LT1167};
+    \draw (11.95,1.9) node[left] {6} -- (12.77,1.9)
+      node[ocirc,label=right:OUT]{};
+    \draw (11.95,1.24) node[left,font=\scriptsize] {REF\,5}
+      -- (12.32,1.24) -- (12.32,0.58) node[ground]{};
+    \node[above,font=\footnotesize] at (10.59,3.05) {$\pm\SI{12}{\volt}$};
+    \draw (9.88,0.79) node[above,font=\scriptsize] {1} -- (9.88,-0.15)
+      to[R,l_={$R_G=\SI{35.7}{\ohm}$}] (11.3,-0.15) -- (11.3,0.79)
+      node[above,font=\scriptsize] {8};
+  \end{circuitikz}%
+}
+
+\newcommand{\LabTiefpass}{%
+  \begin{circuitikz}[european resistors, font=\small]
+    \node[lab geraet,minimum height=1.1cm] (amp) at (1.7,1.68) {DMS-Brücke und\\LT1167};
+    \draw (amp.east) -- (4.49,1.68) node[circ]{}
+      to[R,l={$R_F=\SI{22}{\kilo\ohm}$}] (8.46,1.68) node[circ]{}
+      -- (9.79,1.68) node[ocirc,label=right:{OUT-F}]{};
+    \draw (4.49,1.68) -- (4.49,2.76) node[ocirc,label=above:OUT]{};
+    \node[lab beschriftung,right] at (4.59,2.66) {\SI{2.7}{\milli\volt} RMS};
+    \draw (8.46,1.68) to[C,l_={$C_F=\SI{1}{\micro\farad}$}] (8.46,-0.07) node[ground]{};
+    \node[lab beschriftung,below right] at (9.7,1.56) {\SI{150}{\micro\volt} RMS};
+    \node[lab beschriftung,below] at (amp.south) {Brückenspeisung $\pm\SI{12}{\volt}$};
+  \end{circuitikz}%
+}

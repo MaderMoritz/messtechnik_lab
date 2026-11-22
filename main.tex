@@ -2,6 +2,8 @@
 % Deckblattdaten in protokolldaten.tex bearbeiten.
 \documentclass[11pt,a4paper]{scrartcl}
 \input{vorlage/praeambel}
+\usepackage{circuitikz}
+\input{kapitel/schaltbilder-lab3}
 \input{protokolldaten}
 \KOMAoptions{listof=totoc,bibliography=totoc}
 \hypersetup{pdftitle={Laborprotokoll \Versuchsnummer: \Versuchstitel},
@@ -94,6 +96,7 @@ Ein RC-Tiefpass dient abschließend zur Verringerung der Rauschspannung.
 \subsection{Bestätigung der selbst durchgeführten Messungen und der daraus gewonnenen Ergebnisse}
 Wir bestätigen, dass wir sämtliche in diesem Protokoll als Messungen angeführten Versuche selbst durchgeführt und die zugehörigen Messergebnisse selbst erhoben haben.
 Ergänzende Simulationen sind im Protokoll ausdrücklich als solche gekennzeichnet.
+Für die Erstellung der eigenen Schaltbilder und die Formatierung der \LaTeX-Datei haben wir ChatGPT als KI-Hilfsmittel verwendet.
 
 \subsection{Unterschriften aller Teilnehmer}
 \vspace{16mm}
@@ -115,32 +118,27 @@ Ergänzende Simulationen sind im Protokoll ausdrücklich als solche gekennzeichn
 \section{DC-Messbrücke}
 Ziel dieses Versuchs ist die Bestimmung des parasitären Parallelwiderstands eines Kondensators mit einer DC-Wheatstone-Abgleichmessbrücke.
 Der Parallelwiderstand beschreibt die Leckströme durch das nicht ideal isolierende Dielektrikum.
+Zum Einstellen des Widerstands $R_1$ stand eine Widerstandsdekade zur Verfügung.
 
 \subsection{Messschaltung}
-\Cref{fig:wien_bridge} zeigt eine Kapazitätsmessbrücke nach Wien mit zwei Parallel-RC-Zweigen und zwei rein ohmschen Brückenarmen.
-Dabei sind $R_1$ und $C_1$ die einstellbaren Vergleichsgrößen; $R_2$ und $C_2$ beschreiben den zu untersuchenden Kondensator.
-Für die DC-Messung wird der Vergleichskondensator $C_1$ weggelassen.
-Nach dem Einschwingen fließt durch den idealen kapazitiven Anteil von $C_2$ kein Gleichstrom, der Parallelwiderstand $R_2$ bleibt wirksam.
+\Cref{fig:wien_bridge} zeigt die für den DC-Abgleich verwendete Brücke. Die Diagonalspannung $U_d$ wurde mit dem Multimeter gemessen.
+$R_2$ und $C_2$ bilden das Parallelersatzschaltbild des untersuchten Kondensators.
+Nach dem Einschwingen fließt durch $C_2$ kein Gleichstrom. Der Parallelwiderstand $R_2$ bleibt wirksam.
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.4\textwidth]{shematics/wien_bridge.png}
-  \caption{Kapazitätsmessbrücke nach Wien; für die DC-Messung wird $C_1$ weggelassen.}
-  \label{fig:wien_bridge}
-\end{figure}
+\LabSchaltbild{DC-Abgleichmessbrücke}{fig:wien_bridge}{\LabVergleichsbruecke{0}}{DC-Abgleichmessbrücke mit Widerstandsdekade und Serienwiderstand im Arm $R_1'$. Mit ChatGPT in CircuitikZ erstellt.}
 
-Zum Einstellen des Widerstands $R_1$ stand eine Widerstandsdekade zur Verfügung.
+
 % Foto der verwendeten Widerstandsdekade hier ergänzen.
 
 \subsection{Wahl der Versorgungsspannung}
 Zur Bestimmung des Parallelwiderstands $R_2$ wurde eine Gleichspannung von $U_S = \SI{15}{\volt}$ gewählt.
 Das Laborskript sieht hierfür eine Versorgungsspannung zwischen \SI{1}{\volt} und \SI{30}{\volt} vor~\cite{laborskript}.
-Bei unveränderten linearen Widerständen bewirkt eine höhere Versorgungsspannung eine größere Diagonalspannung.
+Bei unveränderten Widerständen bewirkt eine höhere Versorgungsspannung eine größere Diagonalspannung.
 Dadurch lässt sich eine Abweichung vom Nullpunkt leichter erkennen.
-Die Wahl von \SI{15}{\volt} erfolgte als Kompromiss zwischen Abgleichempfindlichkeit und Bauteilbelastung eine optimale Speisespannung wurde damit nicht nachgewiesen.
+Die Wahl von \SI{15}{\volt} erfolgte als Kompromiss zwischen Abgleichempfindlichkeit und Bauteilbelastung.
 
 \subsection{Bestimmung des Realteils der Impedanz}
-Aus den beiden Spannungsteilern der allgemeinen Vergleichsschaltung folgt für den Abgleich $U_d = 0$ die Bedingung
+Aus den beiden Spannungsteilern der Schaltung folgt für den Abgleich $U_d = 0$ die Bedingung
 \begin{equation}
   \addxcontentsline{loe}{equation}[\theequation]{Abgleichbedingung der Vergleichsbrücke}
   R_2 R_3 + j \omega R_1 R_2 R_3 C_1
@@ -154,36 +152,35 @@ Der Vergleich der Realteile von \cref{eq:abgleichbedingung} liefert
   R_2 = \frac{R_4}{R_3} R_1.
   \label{eq:realgleich}
 \end{equation}
-Für die AC-Messung mit $\omega \ne 0$ ergibt der Vergleich der Imaginärteile bei von null verschiedenen Widerständen zusätzlich
+Für die AC-Messung mit $\omega \ne 0$ ergibt der Vergleich der Imaginärteile
 \begin{equation}
   \addxcontentsline{loe}{equation}[\theequation]{Berechnung der Kapazität bei AC-Abgleich}
   C_2 = \frac{R_3}{R_4} C_1.
   \label{eq:imaggleich}
 \end{equation}
-Diese zweite Bedingung wird bei der späteren Kapazitätsmessung verwendet; bei Gleichspannung lässt sich $C_2$ aus dem stationären Abgleich nicht bestimmen.
-
+Diese zweite Bedingung wird bei der späteren Kapazitätsmessung verwendet.
 Für die DC-Messung wird $R_1$ so lange verändert, bis die mit einem Multimeter gemessene Diagonalspannung möglichst nahe bei null liegt.
-Nach Änderungen der Speisung oder der Widerstände muss der Einschwingvorgang abgewartet werden.
+Nach Änderungen von $U_S$ oder der Widerstände muss der Einschwingvorgang abgewartet werden.
 Das Verhältnis von $R_4$ zu $R_3$ wurde so gewählt, dass bei der anschließenden AC-Messung eine mit der vorhandenen Kapazitätsdekade einstellbare Vergleichskapazität verwendet werden kann.
 Die eingesetzten Widerstände waren
 \begin{itemize}
   \item $R_4 = \SI{470}{\kilo\ohm}$,
   \item $R_3 = \SI{100.1}{\kilo\ohm}$.
 \end{itemize}
-Daraus ergibt sich das dimensionslose Widerstandsverhältnis
+Daraus ergibt sich das Widerstandsverhältnis
 \[
   \frac{R_4}{R_3}
   = \frac{\SI{470}{\kilo\ohm}}{\SI{100.1}{\kilo\ohm}}
   \approx \num{4.695305}.
 \]
-Für die weiteren Rechnungen wurde das Verhältnis ohne vorzeitiges Runden verwendet.
+Für die weiteren Rechnungen wurde das Verhältnis ohne Runden verwendet.
 
 Da der Einstellbereich der Widerstandsdekade nicht ausreichte, wurde der Vergleichsarm um zwei in Reihe geschaltete Widerstände ergänzt.
 Die beiden Zusatzwiderstände wurden auf einem Steckbrett in Reihe geschaltet.
 Der gemeinsam gemessene Serienwiderstand beträgt $R_{\mathrm{Serie}} = \SI{1330}{\kilo\ohm}$.
 
 Der gesamte Vergleichswiderstand wird mit $R_1' = R_1 + R_{\mathrm{Serie}}$ bezeichnet.
-Bei $R_1' = \SI{1.405}{\mega\ohm}$ wurde eine Restdiagonalspannung von $U_d = \SI{0.01}{\milli\volt}$ gemessen; die Brücke war damit näherungsweise abgeglichen.
+Bei $R_1' = \SI{1.405}{\mega\ohm}$ wurde eine Restdiagonalspannung von $U_d = \SI{0.01}{\milli\volt}$ gemessen. Die Brücke war damit näherungsweise abgeglichen.
 
 In \cref{eq:realgleich} ist für diesen erweiterten Aufbau der gesamte Vergleichswiderstand $R_1'$ einzusetzen.
 Damit ergibt sich aus den angegebenen Widerstandswerten
@@ -192,7 +189,6 @@ Damit ergibt sich aus den angegebenen Widerstandswerten
       = \frac{470}{\num{100.1}}\cdot\SI{1.405}{\mega\ohm}
       \approx \SI{6.597}{\mega\ohm}.
 \]
-Die Rundung dieses Rechenwerts ersetzt keine Bestimmung der Messunsicherheit.
 
 \subsection{Abhängigkeit von der Versorgungsspannung bei nicht abgeglichener Brücke: Plot und Erklärung}
 Für die Abhängigkeit von der Versorgungsspannung wurde keine Messreihe aufgenommen.
@@ -221,11 +217,7 @@ Bei ideal abgeglichener Brücke bleibt $U_d=0$.
 
 Der Plot zeigt den erwarteten annähernd linearen Anstieg der Differenzspannung mit der Versorgungsspannung.
 In der Simulation wurde der gesamte Vergleichswiderstand mit $R_1'=\SI{1.405}{\mega\ohm}$ eingesetzt.
-Bei $U_S=\SI{15}{\volt}$ beträgt die dargestellte Differenzspannung etwa \SI{0.0329}{\milli\volt}; im Labor wurden \SI{0.01}{\milli\volt} gemessen.
-Die idealisierte Spannungsteilerrechnung ergibt mit den eingetragenen Widerständen einen Betrag von etwa \SI{0.0319}{\milli\volt}.
-Die Simulation liegt damit nahe am idealen Abgleich.
-Schon die Rundung des aus dem DC-Abgleich bestimmten Parallelwiderstands auf $R_2=\SI{6.597}{\mega\ohm}$ führt im Modell zu einer kleinen Restspannung.
-Die verbleibende Abweichung zum Laborwert kann zusätzlich durch die tatsächlichen Widerstandswerte und die Belastung beziehungsweise den Offset des Messgeräts beeinflusst werden; die einzelnen Beiträge wurden nicht getrennt bestimmt.
+Bei $U_S=\SI{15}{\volt}$ beträgt die dargestellte Differenzspannung etwa \SI{0.0329}{\milli\volt}. Im Labor wurden \SI{0.01}{\milli\volt} gemessen.
 
 \subsection{Auswirkung des Innenwiderstands des Messgeräts}
 Die Differenzspannung wurde mit dem Keysight U1232A gemessen.
@@ -236,7 +228,6 @@ Der Eingangswiderstand sollte deshalb deutlich größer als der von der Messdiag
 
 Bei ideal abgeglichener Brücke ist $U_d=0$, und es fließt kein Strom durch das Voltmeter.
 Ein rein ohmscher Eingangswiderstand verändert daher die ideale Abgleichbedingung nicht.
-Durch die kleinere Anzeige außerhalb des Abgleichs wird es aber schwieriger, eine geringe Verstimmung zu erkennen.
 
 
 
@@ -245,20 +236,17 @@ Durch die kleinere Anzeige außerhalb des Abgleichs wird es aber schwieriger, ei
 Mit der AC-Messbrücke wird die unbekannte Kapazität $C_2$ bestimmt~\cite{laborskript}.
 
 \subsection{Messschaltung}
-Die Schaltung aus der DC-Messung wurde übernommen und um die einstellbare Kapazität $C_1$ parallel zu $R_1'$ erweitert, wie in \cref{fig:wien_bridge} dargestellt.
-Die Widerstände blieben unverändert: $R_3=\SI{100.1}{\kilo\ohm}$, $R_4=\SI{470}{\kilo\ohm}$ und $R_1'=\SI{1.405}{\mega\ohm}$ einschließlich der Zusatzwiderstände.
+Die Schaltung aus der DC-Messung wurde um die einstellbare Kapazität $C_1$ parallel zu $R_1'$ erweitert, wie in \cref{fig:ac-wien-bruecke} dargestellt.
 Die Brücke wurde mit dem Funktionsgenerator versorgt. Die Differenzspannung wurde mit dem Oszilloskop gemessen.
 
+\LabSchaltbild{AC-Abgleichmessbrücke nach Wien}{fig:ac-wien-bruecke}{\LabVergleichsbruecke{1}}{AC-Abgleichmessbrücke nach Wien. Die Kapazitätsdekade $C_1$ liegt parallel zu $R_1'$. Mit ChatGPT in CircuitikZ erstellt.}
 \subsection{Wahl der Spannung}
 Am Funktionsgenerator wurde eine sinusförmige Spannung von $U_{S,\mathrm{pp}}=\SI{4}{\volt}$ eingestellt.
-Für einen Sinus ohne Gleichanteil entspricht dies einem Effektivwert von etwa \SI{1.41}{\volt}.
-Eine größere Versorgungsspannung macht eine verbleibende Differenzspannung leichter erkennbar, erhöht aber auch die Belastung der Bauteile.
+Eine größere Versorgungsspannung macht eine verbleibende Differenzspannung leichter erkennbar.
 
 \subsection{Wahl des Frequenzbereichs}
 Für die Messung wurde eine Frequenz von $f=\SI{1}{\kilo\hertz}$ eingestellt.
 Im Gegensatz zur DC-Messung fließt dabei auch durch die Kondensatoren ein Wechselstrom.
-Der kapazitive Blindwiderstand $X_C=-1/(2\pi f C)$ und damit die Empfindlichkeit des Abgleichs hängen von der Frequenz ab.
-Mit der einzelnen Messung wurde kein optimaler Frequenzbereich nachgewiesen.
 
 \subsection{Abgleichbedingung der AC-Messbrücke}
 Für den idealen Abgleich müssen Real- und Imaginärteil der Differenzspannung null sein.
@@ -280,13 +268,13 @@ Mit \cref{eq:imaggleich} ergibt sich die unbekannte Kapazität zu
   \label{eq:kapazitaet-ergebnis}
 \end{equation}
 Da die Differenzspannung nicht vollständig null war, ist dies ein Näherungswert aus dem vorgenommenen Abgleich.
-Aus der Restspannung allein lässt sich keine genaue Messunsicherheit für $C_2$ angeben.
+
 
 \clearpage
 \subsection{Oszilloskopbilder zum Abgleich}
 \Cref{fig:ac-bruecke-unabgeglichen,fig:ac-bruecke-abgeglichen} zeigen die Brücke vor und nach dem Kapazitätsabgleich.
 Die RMS-Anzeige der Differenzspannung sinkt von \SI{192}{\milli\volt} auf \SI{9.70}{\milli\volt}.
-Der zweite Wert entspricht gerundet den angegebenen \SI{10}{\milli\volt}; ein vollständiger Nullabgleich wurde nicht erreicht.
+
 
 \begin{center}
 \begin{minipage}{0.82\linewidth}
@@ -314,9 +302,12 @@ Der Subtrahierverstärker wurde nach Abschnitt 3.2.1 des Laborskripts aufgebaut 
 Die bipolare Versorgung wurde auf $\pm\SI{12}{\volt}$ und die Strombegrenzung auf \SI{250}{\milli\ampere} eingestellt.
 
 
+\LabSchaltbild{Subtrahierverstärker mit Differenzeingang}{fig:schaltung-sub}{\LabSubtrahierverstaerker{0}}{Vereinfachte Schaltung zur Messung der Differenzverstärkung des Subtrahierverstärkers mit der Eingangsdifferenzspannung $U_d(t)$ und dem Messabgriff \texttt{OUT}. Mit ChatGPT in CircuitikZ erstellt.}
+
 \subsection{Berechnung der Widerstandswerte}
+\Cref{fig:schaltung-sub} zeigt die Anordnung der vier Widerstände.
 In der Hausaufgabe wurde für die Halbbrücke eine maximale Differenzspannung von $U_{d,\mathrm{max}}=\SI{0.25}{\milli\volt}$ berechnet.
-Mit der gewählten Verstärkung von 1000 ergibt sich daraus ein Ausgangssignal von \SI{0.25}{\volt} ohne Offset.
+Mit der gewählten Verstärkung von 1000 ergibt sich daraus ein Ausgangssignal von \SI{0.25}{\volt}.
 Für gleiche Widerstandsverhältnisse gilt ideal
 \begin{equation}
   \addxcontentsline{loe}{equation}[\theequation]{Nominale Differenzverstärkung des Subtrahierverstärkers}
@@ -348,6 +339,7 @@ Die Verhältnisse liegen damit etwas über dem Sollwert und stimmen nicht exakt 
 Für die Differenzverstärkung ist daraus näherungsweise ein Wert von 1017 zu erwarten.
 
 \subsection{Verstärkungsmessung}
+Für die Differenzverstärkung wurde der Messverstärker mit einer sinusförmigen Differenzspannung angesteuert, siehe \cref{fig:schaltung-sub}.
 Der Funktionsgenerator wurde auf eine Spitze-Spitze-Spannung von $U_{e,\mathrm{pp}}=\SI{4}{\milli\volt}$ bei $f=\SI{2}{\kilo\hertz}$ eingestellt.
 Am Ausgang wurden $U_{a,\mathrm{pp}}=\SI{4.22}{\volt}$ gemessen, siehe \cref{fig:sub-verstaerkung}.
 Damit ergibt sich
@@ -371,8 +363,9 @@ Die Widerstandswerte erklären somit einen Teil der Abweichung.
 \end{center}
 
 \subsection{Offsetmessung und Eingangs-Offset}
-% TODO: Schaltbild der tatsaechlichen Offset-Messbeschaltung ergaenzen.
-Für diese Messung wurden beide Eingänge kurzgeschlossen und gemeinsam mit Masse verbunden.
+Für diese Messung wurden beide Eingänge kurzgeschlossen und gemeinsam mit Masse verbunden, siehe \cref{fig:schaltung-sub-null}.
+
+\LabSchaltbild{Offset- und Rauschmessung am Subtrahierverstärker}{fig:schaltung-sub-null}{\LabSubtrahierverstaerker{1}}{Subtrahierverstärker mit beiden Eingängen auf Masse und Oszilloskop an \texttt{OUT} für die Offset- und Rauschmessung. Mit ChatGPT in CircuitikZ erstellt.}
 Am Ausgang wurde ein Offsetbetrag von $U_{a,\mathrm{os}}=\SI{522.5}{\milli\volt}$ gemessen.
 Auf die gemessene Differenzverstärkung bezogen entspricht dies
 \begin{equation}
@@ -386,18 +379,17 @@ Der Ausgangsoffset ist damit größer als das für die Halbbrücke berechnete Nu
 Er muss bei einer späteren Brückenmessung berücksichtigt werden.
 
 Das Datenblatt des TLV170 nennt bei \SI{25}{\celsius} eine typische Eingangs-Offsetspannung von \SI{0.5}{\milli\volt} und einen Grenzwert von $\pm\SI{2.5}{\milli\volt}$~\cite{tlv170-datenblatt}.
-Im vereinfachten DC-Modell wird der interne OPV-Spannungsoffset mit der Rauschverstärkung $1+R_2/R_1\approx1018$ auf den Ausgang übertragen.
-Der typische Wert würde somit einen Ausgangsoffset von etwa \SI{0.509}{\volt} verursachen und erklärt die Größenordnung der separat gemessenen \SI{522.5}{\milli\volt}.
-Ein solcher interner Offset wirkt auch ohne angeschlossene Brücke und ohne Gleichanteil des Generatorsignals.
 
 Bei der Sinusmessung in \cref{fig:sub-verstaerkung} ist eine größere Gleichspannungsverschiebung erkennbar.
-Bei sonst gleichen Betriebsbedingungen wäre auch dort eine ähnliche Ausgangsmittellage wie bei der separaten Offsetmessung zu erwarten.
-Die Abweichung zwischen beiden Messungen konnte anhand der dokumentierten Messbedingungen nicht eindeutig geklärt werden.
+Es wäre dort eine ähnliche Ausgangsmittellage wie bei der separaten Offsetmessung zu erwarten.
+Die Abweichung zwischen beiden Messungen konnte nicht eindeutig geklärt werden.
 Eine alleinige Verursachung durch den OPV-Offset und die Einhaltung seiner Datenblattspezifikation lassen sich daraus nicht nachweisen.
 
 \subsection{CMRR-Messung beziehungsweise Berechnung}
-% TODO: Schaltbild der CMRR-Messbeschaltung ergaenzen.
-Beide Eingänge wurden kurzgeschlossen und gemeinsam auf \SI{2.5}{\volt}, \SI{3.3}{\volt} und \SI{5}{\volt} gelegt.
+Beide Eingänge wurden kurzgeschlossen und gemeinsam auf \SI{2.5}{\volt}, \SI{3.3}{\volt} und \SI{5}{\volt} gelegt, siehe \cref{fig:schaltung-sub-cmrr}.
+
+\LabSchaltbild{Gleichtaktmessung am Subtrahierverstärker}{fig:schaltung-sub-cmrr}{\LabSubtrahierverstaerker{2}}{Gleichtaktmessung mit dem gemeinsamen Eingangspegel $U_{\mathrm{cm}}$ und Oszilloskop an \texttt{OUT}. Mit ChatGPT in CircuitikZ erstellt.}
+
 Bei diesen Gleichtaktpegeln war keine Änderung des Ausgangs am Oszilloskop erkennbar.
 Nach Rücksprache mit dem Labortutor wurde diese Beobachtung so dokumentiert.
 Für die Auswertung wären
@@ -412,8 +404,7 @@ Dies bedeutet nicht, dass $G_{\mathrm{cm}}$ exakt null oder die CMRR unendlich i
 
 
 \subsection{Messung der Rauschspannung}
-% TODO: Schaltbild der Rauschmessung mit beiden Eingaengen auf Masse ergaenzen.
-Für die Rauschmessung wurden beide Eingänge auf Masse gelegt.
+Für die Rauschmessung wurden beide Eingänge auf Masse gelegt, siehe \cref{fig:schaltung-sub-null}.
 Am Ausgang wurde der Rauschanteil mit dem Oszilloskop bei AC-Kopplung als Effektivwert gemessen.
 Das Oszilloskop zeigt einen AC-RMS-Wert von \SI{1.409}{\milli\volt}, siehe \cref{fig:sub-rauschen}.
 Der Wert beschreibt das Rauschen des verwendeten Aufbaus einschließlich der Messkette.
@@ -433,7 +424,10 @@ Der Wert beschreibt das Rauschen des verwendeten Aufbaus einschließlich der Mes
 Der Instrumentenverstärker LT1167 wurde nach Abschnitt 3.2.2 des Laborskripts untersucht~\cite{laborskript}.
 Die Versorgungsspannung betrug $\pm\SI{12}{\volt}$.
 
+\LabSchaltbild{Instrumentenverstärker LT1167 mit Differenzeingang}{fig:schaltung-instr}{\LabInstrumentenverstaerker{0}}{LT1167 zur Messung der Differenzverstärkung. Der Widerstand $R_G$ liegt zwischen Pin~1 und Pin~8. REF an Pin~5 liegt auf Masse. Die Eingangswiderstände $R_9$ und $R_{10}$ betragen je \SI{4.7}{\kilo\ohm}. Eigene Zeichnung nach Laborskript~\cite[S.~31, Abb.~3.1]{laborskript}. Zum Prinzip siehe VO~06~\cite[Folie~53]{vo06-messverstaerker} und Schrüfer et al.~\cite[S.~208, Bild~3.16]{messtechnik-buch}.}
+
 \subsection{Berechnung des Gain-Widerstands}
+Die Anschlüsse des Gain-Widerstands sind in \cref{fig:schaltung-instr} dargestellt.
 Für die gewählte Sollverstärkung $G_{\mathrm{DM,soll}}=1500$ ergibt sich mit der Verstärkungsformel des Laborskripts
 \begin{equation}
   \addxcontentsline{loe}{equation}[\theequation]{Dimensionierung des Gain-Widerstands des Instrumentenverstärkers}
@@ -454,6 +448,7 @@ Daraus folgt die erwartete Verstärkung
 Die Erwartung liegt damit bereits aufgrund des eingesetzten Widerstands unter der gewählten Sollverstärkung.
 
 \subsection{Verstärkungsmessung}
+Die Prüfbeschaltung für die Differenzverstärkung ist in \cref{fig:schaltung-instr} dargestellt.
 Der Funktionsgenerator wurde auf einen Sinus mit \SI{4}{\milli\volt} Spitze-Spitze-Spannung und \SI{1}{\kilo\hertz} eingestellt.
 Kanal 2 des Oszilloskops erfasste das Eingangssignal, Kanal 1 das Ausgangssignal.
 In \cref{fig:instr-verstaerkung} sind $U_{e,\mathrm{pp}}=\SI{4.3}{\milli\volt}$ und $U_{a,\mathrm{pp}}=\SI{5.8}{\volt}$ ablesbar.
@@ -481,8 +476,10 @@ Die Abweichung der eingestellten von der tatsächlich gemessenen Eingangsspannun
 \end{center}
 
 \subsection{Offsetmessung und Eingangs-Offset}
-% TODO: Schaltbild der Offsetmessung mit beiden Eingaengen auf Masse ergaenzen.
-Beide Eingänge wurden kurzgeschlossen und gemeinsam auf Masse gelegt.
+Beide Eingänge wurden kurzgeschlossen und gemeinsam auf Masse gelegt, siehe \cref{fig:schaltung-instr-null}.
+
+\LabSchaltbild{Offset- und Rauschmessung am Instrumentenverstärker}{fig:schaltung-instr-null}{\LabInstrumentenverstaerker{1}}{LT1167 mit beiden Platineneingängen auf Masse und Oszilloskop an \texttt{OUT} für die Offset- und Rauschmessung. Eigene Zeichnung nach Laborskript~\cite[S.~31 und 34, Abb.~3.1 und Abschn.~3.2.2]{laborskript}.}
+
 Der am Ausgang gemessene Mittelwert betrug $U_{a,\mathrm{os}}=-\SI{11.76}{\milli\volt}$, siehe \cref{fig:instr-offset}.
 Mit der gemessenen Signalverstärkung ergibt sich näherungsweise der äquivalente Eingangs-Offset
 \begin{equation}
@@ -510,15 +507,16 @@ Die Spitze-Spitze-Spannung dieses Verlaufs ist vom DC-Offset und vom Rauscheffek
 \end{center}
 
 \subsection{CMRR-Messung beziehungsweise Berechnung}
-% TODO: Schaltbild der CMRR-Messbeschaltung ergaenzen.
-Die Gleichtaktmessung wurde analog zur Messung am Subtrahierverstärker durchgeführt.
+Die Gleichtaktmessung wurde analog zur Messung am Subtrahierverstärker durchgeführt, siehe \cref{fig:schaltung-instr-cmrr}.
+
+\LabSchaltbild{Gleichtaktmessung am Instrumentenverstärker}{fig:schaltung-instr-cmrr}{\LabInstrumentenverstaerker{2}}{Gleichtaktmessung am LT1167 mit gemeinsamem Eingangspegel $U_{\mathrm{cm}}$ und Oszilloskop an \texttt{OUT}. Eigene Zeichnung nach Laborskript~\cite[S.~31 und 34, Abb.~3.1 und Abschn.~3.2.2]{laborskript}.}
+
 Bei gemeinsam angesteuerten Eingängen war keine Änderung der Ausgangsspannung erkennbar.
 Da keine Nachweisgrenze festgehalten wurde, konnten weder eine Gleichtaktverstärkung noch ein belastbarer Zahlenwert der CMRR bestimmt werden.
 Aus der fehlenden erkennbaren Änderung folgt keine unendliche Gleichtaktunterdrückung.
 
 \subsection{Messung der Rauschspannung}
-% TODO: Schaltbild der Rauschmessung mit beiden Eingaengen auf Masse ergaenzen.
-Für die Rauschmessung wurden beide Eingänge auf Masse gelegt.
+Für die Rauschmessung wurden beide Eingänge auf Masse gelegt, siehe \cref{fig:schaltung-instr-null}.
 Am Ausgang wurde mit AC-Kopplung der Effektivwert des Rauschanteils gemessen.
 Die Anzeige in \cref{fig:instr-rauschen} beträgt \SI{1.960}{\milli\volt} AC-RMS.
 
@@ -574,7 +572,9 @@ Der Instrumentenverstärker wurde mit $\pm\SI{12}{\volt}$ versorgt.
 Als Gain-Widerstand wurde weiterhin $R_G=\SI{35.7}{\ohm}$ verwendet.
 Die Brücke wurde zwischen $+\SI{12}{\volt}$ und $-\SI{12}{\volt}$ an den Anschlüssen 1 und 2 gespeist.
 Damit betrug die Brückenspeisespannung $U_B=\SI{24}{\volt}$.
-Der Aufbau blieb während der Referenz- und Handymessungen unverändert.
+Der Aufbau blieb während der Referenz- und Handymessungen unverändert. \Cref{fig:schaltung-dms-halbbruecke} zeigt die Messkette.
+
+\LabSchaltbild{DMS-Halbbrücke mit Instrumentenverstärker}{fig:schaltung-dms-halbbruecke}{\LabDMSBruecke{0}}{DMS-Halbbrücke mit Abgriff an Anschluss~3 und einem Potentiometer als zweitem Brückenzweig. Die Eingangspolarität folgt der Rechenkonvention für $U_d$. Eigene Zeichnung mit den Anschlussnummern des Balkens nach Laborskript~\cite[S.~34--35, Abb.~3.2 und Abschn.~3.3.1]{laborskript}, vgl. die Übersicht in \cite[S.~17, Abb.~4.1]{vergleichsprotokoll}.}
 
 \begin{center}
 \begin{minipage}{\linewidth}
@@ -714,6 +714,10 @@ Brückenspeisung und Gain-Widerstand wurden gegenüber der Gewichtsmessung nicht
 Der Widerstand des oberen PT1000 wurde mit einem Multimeter gemessen und daraus die Temperatur bestimmt.
 Die Verstärkerausgangsspannung und ihr AC-RMS-Wert wurden mit einem Oszilloskop gemessen.
 Der untere PT1000 wurde nicht gemessen.
+\Cref{fig:schaltung-pt1000} zeigt die Anschlüsse am Biegebalken. Für den oberen PT1000 wurde das Multimeter an die Anschlüsse~5 und~6 angeschlossen. Die Heizung liegt zwischen den Anschlüssen~8 und~9. Die elektrische Messkette ist in \cref{fig:schaltung-dms-halbbruecke} dargestellt.
+
+\LabSchaltbild{Anschlüsse am Biegebalken}{fig:schaltung-pt1000}{\includegraphics[width=0.86\linewidth]{kapitel/laborskript-abb-3-2.pdf}}{Biegebalken mit DMS-Vollbrücke, zwei PT1000-Temperatursensoren und Heizwiderstand. Originalabbildung aus dem Laborskript~\cite[Abb.~3.2, S.~34]{laborskript}.}
+
 Bei einem angezeigten Widerstand von \SI{1234}{\ohm} wurde die Heizung abgeschaltet, damit der berechnete Grenzwert nicht überschritten wird.
 
 
@@ -842,7 +846,9 @@ Die Gerade beschreibt den mittleren Trend der Heizpunkte; die gemessenen Werte s
 \clearpage
 \section{Vollbrücke}
 \subsection{Sensitivitätsmessung und Vergleich mit der Halbbrücke}
-Nach dem Abschalten der Heizung wurde die Halbbrücke zur Vollbrücke erweitert.
+Nach dem Abschalten der Heizung wurde die Halbbrücke zur Vollbrücke erweitert. Der Abgriff an Anschluss~4 ersetzte den Potentiometerschleifer, siehe \cref{fig:schaltung-dms-vollbruecke}.
+
+\LabSchaltbild{DMS-Vollbrücke mit Instrumentenverstärker}{fig:schaltung-dms-vollbruecke}{\LabDMSBruecke{1}}{DMS-Vollbrücke mit vier aktiven DMS. Die Brückenabgriffe~3 und~4 führen zum Instrumentenverstärker. Die Eingangspolarität folgt derselben Rechenkonvention wie bei der Halbbrücke. Eigene Darstellung nach Laborskript~\cite[S.~34 und 36, Abb.~3.2 und Abschn.~3.3.3]{laborskript} und VO~04~\cite[Folie~60]{vo04-impedanz}.}
 Die Sensitivität der Vollbrücke wurde nach Abschnitt 3.3.3 des Laborskripts mit den bereitgestellten Referenzgewichten bestimmt~\cite{laborskript}.
 Der Balken war dabei nach dem Heizversuch noch nicht auf Raumtemperatur abgekühlt.
 Die Temperatur während dieser Lastmessung ist nicht bekannt.
@@ -905,6 +911,7 @@ Der gemeinsame Lastbereich verbessert die Vergleichbarkeit der Auswertung, besei
 Da die Vollbrücke noch erwärmt war und auch eine mögliche Temperaturänderung während der Lastreihe nicht erfasst wurde, lässt sich die Abweichung vom idealen Faktor zwei nicht allein der Brückenschaltung zuordnen.
 
 \subsection{Temperaturabhängigkeit}
+Der obere PT1000 wurde erneut über die Anschlüsse~5 und~6 des Biegebalkens gemessen (siehe \cref{fig:schaltung-pt1000}). \Cref{fig:schaltung-dms-vollbruecke} zeigt die Messkette für Ausgangsspannung und Rauschen.
 Die Waage war während der Temperaturmessung unbelastet und kühlte ab.
 Speisung, Gain-Widerstand und oberer PT1000 wurden unverändert weiterverwendet.
 Auch bei der Vollbrücke wurde der PT1000-Widerstand mit einem Multimeter und die Ausgangsspannung mit einem Oszilloskop gemessen.
@@ -999,7 +1006,10 @@ Mit \cref{eq:temperatur-pt1000-umrechnung} folgt daraus
   \label{eq:filter-messtemperatur}
 \end{equation}
 Abweichend von der im Skript vorgesehenen Messung bei Umgebungstemperatur beziehen sich die folgenden Werte somit auf den noch erwärmten Balken.
-Die RMS-Rauschspannung wurde mit dem Oszilloskop am ungefilterten und am gefilterten Ausgang gemessen, siehe \cref{tab:filter-rauschmessung}.
+Die Brücke wurde zwischen $+\SI{12}{\volt}$ und $-\SI{12}{\volt}$ gespeist.
+Die RMS-Rauschspannung wurde mit dem Oszilloskop in zwei separaten Messungen an \texttt{OUT} und \texttt{OUT-F} erfasst, siehe \cref{fig:schaltung-tiefpass,tab:filter-rauschmessung}.
+
+\LabSchaltbild{RC-Tiefpass und Messabgriffe}{fig:schaltung-tiefpass}{\LabTiefpass}{Tiefpass hinter dem Instrumentenverstärker mit $R_F=\SI{22}{\kilo\ohm}$ in Serie und $C_F=\SI{1}{\micro\farad}$ gegen Masse. \texttt{OUT} ist der ungefilterte und \texttt{OUT-F} der gefilterte Abgriff. Eigene Darstellung nach Laborskript~\cite[S.~31 und 36--37, Abb.~3.1 und Abschn.~3.3.4]{laborskript}.}
 
 \begin{center}
 \begin{minipage}{\linewidth}
@@ -1068,7 +1078,7 @@ Der Tiefpass begrenzt die übertragene Rauschbandbreite.
   Zugriff am 14.~November~2026.
 
   \bibitem{laborskript}
-  \emph{Messtechnik Labor: Skriptum}, Wintersemester 2026/2027.
+  Ernst Csencsics et al.: \emph{Messtechnik Labor: Laborübung}. TU Wien, Wintersemester 2026/2027.
   Abschnitte 3.1--3.3.4, S.~29--37 (PDF-S.~33--41).
 
   \bibitem{tlv170-datenblatt}
@@ -1076,6 +1086,23 @@ Der Tiefpass begrenzt die übertragene Rauschbandbreite.
   Datenblatt SBOS782A, Revision Mai 2018, Abschnitt~6.7, S.~9.
   \url{https://www.ti.com/lit/ds/symlink/tlv170.pdf}.
 
-  % Hier später weitere Literaturangaben einfügen.
+  \bibitem{vo04-impedanz}
+  Johannes Wiesböck: \emph{Messtechnik VO 04: Impedanzmessung, Brückenschaltungen und kompensationsbasierte Messverfahren}.
+  Vorlesungsfolien, TU Wien. Titelfolie: VU~376.045, Wintersemester 2024. Bereitgestellte Datei
+  \texttt{369010\_VO04\_Impedanzmessung\_WS2025.pdf}.
+
+  \bibitem{vo06-messverstaerker}
+  Ernst Csencsics: \emph{Messtechnik VO 06: Messverstärker}.
+  Vorlesungsfolien zur LVA~369.010, TU Wien, Wintersemester 2025.
+
+  \bibitem{vergleichsprotokoll}
+  Mihai Marinescu: \emph{Laborübung 3: Messbrücken und Messverstärker}.
+  Studentisches Vergleichsprotokoll vom 6.~November~2026, bereitgestellte PDF-Datei.
+  Als Vorlage für die Darstellung der Messbeschaltungen herangezogen.
+
+  \bibitem{messtechnik-buch}
+  Elmar Schrüfer, Leonhard M. Reindl und Bernhard Zagar:
+  \emph{Elektrische Messtechnik: Messung elektrischer und nichtelektrischer Größen}.
+  10., neu bearbeitete Auflage, Carl Hanser Verlag, München 2012. ISBN 978-3-446-43079-2.
 \end{thebibliography}
 \end{document}
