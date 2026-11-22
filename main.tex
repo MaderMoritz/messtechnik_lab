@@ -74,7 +74,7 @@ Fehlende Angaben sind in der Tabelle als unbekannt markiert.
     DC-Netzgerät & RS PRO RS-D3305P \\
     Widerstandsdekade & Goerz Electro \\
     Kapazitätsdekade & Danbridge DK4S \\
-    Steckbrett & ubekannt \\
+    Steckbrett & unbekannt \\
     Potentiometer & unbekannt \\
     DMS-Wägeaufbau & unbekannt \\
     Messverstärker-Platine & unbekannt \\
@@ -103,7 +103,7 @@ Für die Erstellung der eigenen Schaltbilder und die Formatierung der \LaTeX-Dat
 \noindent
 \begin{minipage}[t]{0.30\linewidth}
   \hrule\vspace{3mm}
-  Moritz Mader
+  Mader Moritz
 \end{minipage}\hfill
 \begin{minipage}[t]{0.30\linewidth}
   \hrule\vspace{3mm}
@@ -176,7 +176,6 @@ Daraus ergibt sich das Widerstandsverhältnis
 Für die weiteren Rechnungen wurde das Verhältnis ohne Runden verwendet.
 
 Da der Einstellbereich der Widerstandsdekade nicht ausreichte, wurde der Vergleichsarm um zwei in Reihe geschaltete Widerstände ergänzt.
-Die beiden Zusatzwiderstände wurden auf einem Steckbrett in Reihe geschaltet.
 Der gemeinsam gemessene Serienwiderstand beträgt $R_{\mathrm{Serie}} = \SI{1330}{\kilo\ohm}$.
 
 Der gesamte Vergleichswiderstand wird mit $R_1' = R_1 + R_{\mathrm{Serie}}$ bezeichnet.
@@ -190,7 +189,7 @@ Damit ergibt sich aus den angegebenen Widerstandswerten
       \approx \SI{6.597}{\mega\ohm}.
 \]
 
-\subsection{Abhängigkeit von der Versorgungsspannung bei nicht abgeglichener Brücke: Plot und Erklärung}
+\subsection{Einfluss der Versorgungsspannung auf die verstimmte Brücke}
 Für die Abhängigkeit von der Versorgungsspannung wurde keine Messreihe aufgenommen.
 Ergänzend wurde der Verlauf mit LTspice simuliert und mit MATLAB dargestellt, siehe \cref{fig:dc-bruecke-variable-us}.
 Der Plot zeigt somit keine im Labor aufgenommene Messreihe.
@@ -269,9 +268,6 @@ Mit \cref{eq:imaggleich} ergibt sich die unbekannte Kapazität zu
 \end{equation}
 Da die Differenzspannung nicht vollständig null war, ist dies ein Näherungswert aus dem vorgenommenen Abgleich.
 
-
-\clearpage
-\subsection{Oszilloskopbilder zum Abgleich}
 \Cref{fig:ac-bruecke-unabgeglichen,fig:ac-bruecke-abgeglichen} zeigen die Brücke vor und nach dem Kapazitätsabgleich.
 Die RMS-Anzeige der Differenzspannung sinkt von \SI{192}{\milli\volt} auf \SI{9.70}{\milli\volt}.
 
@@ -461,7 +457,7 @@ Damit ergibt sich eine Verstärkung von:
   \label{eq:instr-gain-mess}
 \end{equation}
 Der gemessene Wert liegt etwa \SI{2.6}{\percent} unter der Erwartung aus dem gemessenen Widerstand und etwa \SI{10.1}{\percent} unter dem Sollwert 1500.
-Die Verstärkung aus Ausgangsspannung und eingestellter Generatoreinstellung würde dagegen 1450 ergeben.
+Mit dem Einstellwert des Generators von 4 mV ergäbe sich eine Verstärkung von 1450.
 Die Abweichung der eingestellten von der tatsächlich gemessenen Eingangsspannung beeinflusst somit die Auswertung deutlich.
 
 
@@ -585,7 +581,7 @@ Der Aufbau blieb während der Referenz- und Handymessungen unverändert. \Cref{f
 \end{minipage}
 \end{center}
 
-\subsection{Berechnung der Sensitivität (Aufgabe 3.4)}
+\subsection{Berechnung der Sensitivität}
 Die Halbbrücke besteht aus zwei aktiven DMS und den beiden Teilwiderständen des Potentiometers~\cite{laborskript}.
 Für die Rechnung werden gleich große, entgegengesetzte Widerstandsänderungen $R_0+\Delta R$ und $R_0-\Delta R$ im DMS-Zweig angenommen.
 Der Nominalwiderstand der DMS beträgt $R_0=\SI{1}{\kilo\ohm}$.
@@ -610,7 +606,7 @@ Mit $U_B=\SI{24}{\volt}$ ergibt sich $S_{\Delta R}\approx\SI{16.62}{\volt\per\oh
 Die numerische Berechnung der Verstärkung und dieser Sensitivität wurde in MATLAB durchgeführt.
 Um die Sensitivität bezüglich der Masse zu bestimmen, werden Referenzgewichte auf die Waage aufgebracht.
 
-\subsection{Messung der Sensitivität und Plot}
+\subsection{Kalibrierung}
 Die Referenzgewichte wurden nacheinander aufgelegt und die Ausgangsspannungen des Instrumentenverstärkers gemessen.
 Aus Zeitgründen wurden nur die fünf Referenzgewichte von \SI{500}{\gram} bis \SI{900}{\gram} in Schritten von \SI{100}{\gram} gemessen.
 Die Messwerte sind in \cref{tab:halbbruecke-gewichte} angegeben.
@@ -638,7 +634,7 @@ Die Messwerte sind in \cref{tab:halbbruecke-gewichte} angegeben.
 Zusätzlich wurde die in der Offsetmessung bestimmte Ausgangsspannung von \SI{610}{\milli\volt} bei $m=0$ einbezogen.
 Die Brücke war bei dieser Messung mit \SI{24}{\volt} gespeist und unbelastet.
 Die gesamte numerische Auswertung der Messdaten und die grafische Darstellung wurden in MATLAB durchgeführt.
-Die insgesamt sechs Punkte wurde dort mit der Methode der kleinsten Quadrate eine Gerade $U_a=S_m m+b$ angepasst.
+An die sechs Punkte wurde mit der Methode der kleinsten Quadrate eine Gerade $U_a=S_m m+b$ angepasst.
 Steigung und Achsenabschnitt wurden dabei frei bestimmt.
 Es ergibt sich
 \begin{equation}
@@ -672,7 +668,7 @@ Ursachen können eine anfängliche Brückenverstimmung und der Verstärkeroffset
 Die \SI{610}{\milli\volt} sind deshalb nicht mit dem separat bestimmten Ausgangsoffset des Instrumentenverstärkers bei kurzgeschlossenen Eingängen gleichzusetzen.
 Die Messung ohne Masse wurde gemeinsam mit den fünf belasteten Referenzpunkten für die Kalibrierung verwendet.
 
-\subsection{Messung des Handy-Gewichts}
+\subsection{Bestimmung der Handymasse}
 Mit aufgelegtem Handy wurde am Verstärkerausgang $U_{a,\mathrm{Handy}}=\SI{1.13}{\volt}$ gemessen.
 Die Umkehrung der Kalibriergeraden einschließlich der Nullmessung liefert
 \begin{equation}
@@ -694,7 +690,7 @@ Mit der bereitgestellten Vergleichswaage wurde eine Handymasse von \SI{206.1}{\g
 Der Punkt $(\SI{206.1}{\gram},\SI{1.13}{\volt})$ ist in \cref{fig:halbbruecke-kalibrierung} als offener blauer Kreis eingetragen.
 Er liegt auf derselben Spannungshöhe wie das blaue Quadrat der DMS-Auswertung. Der horizontale Abstand zeigt die Differenz der beiden Massenwerte.
 Die berechnete Masse liegt etwa \SI{9.1}{\gram} beziehungsweise \SI{4.4}{\percent} unter dem Vergleichswert.
-Die Kalibriergerade würde für \SI{206.1}{\gram} eine Ausgangsspannung von etwa \SI{1.151}{\volt} erwarten.
+Aus der Kalibriergeraden ergibt sich für \SI{206.1}{\gram} eine Ausgangsspannung von etwa \SI{1.151}{\volt}.
 Die Kalibrierpunkte liegen nicht exakt auf einer Geraden.
 Zusätzliche Referenzpunkte im Bereich der Handymasse würden eine genauere Beschreibung der Kennlinie in diesem Bereich ermöglichen.
 
